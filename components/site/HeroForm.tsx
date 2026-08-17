@@ -16,8 +16,7 @@ export function HeroForm() {
   useEffect(() => {
     if (!state.message) return;
     if (state.success) {
-      toast.success("Request submitted! Redirecting to WhatsApp...");
-      window.open(state.message, "_blank", "noopener,noreferrer");
+      toast.success(state.message);
     } else {
       toast.error(state.message);
     }

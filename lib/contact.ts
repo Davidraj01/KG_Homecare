@@ -1,54 +1,11 @@
-// Single source of truth for KG Home Care contact details.
-// Replace PHONE_RAW and WHATSAPP_RAW with the real number when provided.
+// Single source of truth for KG Home Care business info.
+// Contact happens only through the booking form — no phone/WhatsApp/address is published.
 
 export const BUSINESS = {
   name: "KG Home Care",
-  tagline: "Washing Machine Service Centre in Tuticorin",
-  address: {
-    line1: "5A/394, Caldwell Colony 3rd Street",
-    line2: "Tuticorin – 628008",
-    city: "Tuticorin",
-    state: "Tamil Nadu",
-    country: "India",
-  },
+  tagline: "Washing Machine Service & Repair",
   hours: "Mon – Sun · 8:00 AM – 9:00 PM",
-  email: "support@kghomecare.in",
 };
-
-// Use international format without "+" or spaces for wa.me links.
-export const PHONE_RAW = "918778838405";
-export const WHATSAPP_RAW = "918778838405";
-
-export const PHONE_DISPLAY = "+91 87788 38405";
-
-export function telHref(): string {
-  return `tel:+${PHONE_RAW}`;
-}
-
-export function waHref(message?: string): string {
-  const base = `https://wa.me/${WHATSAPP_RAW}`;
-  if (!message) return base;
-  return `${base}?text=${encodeURIComponent(message)}`;
-}
-
-export function bookingMessage(input: {
-  location?: string;
-  brand?: string;
-  issue?: string;
-  phone?: string;
-  service?: string;
-}): string {
-  const lines = [
-    "Hi KG Home Care, I'd like to book a washing machine service.",
-    "",
-    input.service ? `Service: ${input.service}` : null,
-    input.brand ? `Brand: ${input.brand}` : null,
-    input.issue ? `Issue: ${input.issue}` : null,
-    input.location ? `Location: ${input.location}` : null,
-    input.phone ? `My phone: ${input.phone}` : null,
-  ].filter(Boolean);
-  return lines.join("\n");
-}
 
 export const BRANDS = [] as const;
 

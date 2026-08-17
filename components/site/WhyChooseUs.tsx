@@ -53,7 +53,7 @@ export function WhyChooseUs() {
           Why Choose Us
         </span>
         <h2 className="mt-3 text-2xl font-extrabold leading-tight tracking-tight text-white sm:text-3xl">
-          Trusted by 5,000+<br />homes in Tuticorin
+          Trusted by 5,000+<br />happy customers
         </h2>
         <p className="mt-3 text-sm leading-relaxed text-white/65">
           Genuine parts, trained engineers, and a written warranty on every job.

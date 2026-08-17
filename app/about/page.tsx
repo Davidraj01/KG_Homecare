@@ -8,17 +8,17 @@ import { ServiceHeroForm } from "@/components/site/ServiceHeroForm";
 
 export const metadata: Metadata = {
   title: {
-    absolute: "KG Home Care | Washing Machine Experts in Thoothukudi",
+    absolute: "KG Home Care | Washing Machine Experts",
   },
   description:
-    "Get to know KG Home Care, your trusted washing machine specialists in Thoothukudi, delivering reliable solutions with experienced technicians and quality service.",
+    "Get to know KG Home Care, your trusted washing machine specialists, delivering reliable solutions with experienced technicians and quality service.",
   keywords:
-    "kg home care, kg home care thoothukudi, washing machine experts thoothukudi, professional washing machine technicians, trusted appliance service company, experienced washing machine specialists, washing machine service provider thoothukudi, home appliance care experts, washing machine company thoothukudi, local washing machine specialists, reliable appliance technicians, kg home care about us",
+    "kg home care, washing machine experts, professional washing machine technicians, trusted appliance service company, experienced washing machine specialists, washing machine service provider, home appliance care experts, local washing machine specialists, reliable appliance technicians, kg home care about us",
   openGraph: {
     type: "website",
-    title: "KG Home Care | Washing Machine Experts in Thoothukudi",
+    title: "KG Home Care | Washing Machine Experts",
     description:
-      "Get to know KG Home Care, your trusted washing machine specialists in Thoothukudi, delivering reliable solutions with experienced technicians and quality service.",
+      "Get to know KG Home Care, your trusted washing machine specialists, delivering reliable solutions with experienced technicians and quality service.",
     url: "https://kghomecare.in/about/",
     siteName: "KG Home Care",
     locale: "en_IN",
@@ -50,44 +50,6 @@ const breadcrumbSchema = {
       item: "https://kghomecare.in/about/",
     },
   ],
-};
-
-const locationSchema = {
-  "@context": "https://schema.org",
-  "@type": "HomeAndConstructionBusiness",
-  name: "KG Home Care",
-  url: "https://kghomecare.in/",
-  telephone: "+918778838405",
-  image: "https://kghomecare.in/wp-content/uploads/logo.png",
-  description:
-    "Get to know KG Home Care, your trusted washing machine specialists in Thoothukudi, delivering reliable solutions with experienced technicians and quality service.",
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "5A/394, Caldwell Colony 3rd Street",
-    addressLocality: "Thoothukudi",
-    addressRegion: "Tamil Nadu",
-    postalCode: "628008",
-    addressCountry: "IN",
-  },
-  openingHoursSpecification: {
-    "@type": "OpeningHoursSpecification",
-    dayOfWeek: [
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-      "Sunday",
-    ],
-    opens: "08:00",
-    closes: "21:00",
-  },
-  areaServed: {
-    "@type": "City",
-    name: "Thoothukudi",
-  },
-  sameAs: ["https://wa.me/918778838405"],
 };
 
 const reviewSchema = {
@@ -124,7 +86,7 @@ const faqSchema = {
       name: "Who is KG Home Care?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "KG Home Care is a trusted washing machine service provider based in Thoothukudi. We specialize in servicing all major washing machine brands with experienced technicians and a customer-first approach.",
+        text: "KG Home Care is a trusted washing machine service provider. We specialize in servicing all major washing machine brands with experienced technicians and a customer-first approach.",
       },
     },
     {
@@ -145,10 +107,10 @@ const faqSchema = {
     },
     {
       "@type": "Question",
-      name: "Where is KG Home Care located?",
+      name: "How do I check if KG Home Care serves my area?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "KG Home Care is located in Thoothukudi, Tamil Nadu, and provides professional washing machine services across the Thoothukudi district.",
+        text: "Submit a booking request with your details, and our team will confirm availability in your area.",
       },
     },
     {
@@ -169,18 +131,8 @@ const organizationSchema = {
   url: "https://kghomecare.in/",
   logo: "https://kghomecare.in/wp-content/uploads/logo.png",
   image: "https://kghomecare.in/wp-content/uploads/logo.png",
-  telephone: "+918778838405",
   description:
-    "Get to know KG Home Care, your trusted washing machine specialists in Thoothukudi, delivering reliable solutions with experienced technicians and quality service.",
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "5A/394, Caldwell Colony 3rd Street",
-    addressLocality: "Thoothukudi",
-    addressRegion: "Tamil Nadu",
-    postalCode: "628008",
-    addressCountry: "IN",
-  },
-  sameAs: ["https://wa.me/918778838405"],
+    "Get to know KG Home Care, your trusted washing machine specialists, delivering reliable solutions with experienced technicians and quality service.",
 };
 
 const STATS = [
@@ -231,10 +183,6 @@ export default function AboutPage() {
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(locationSchema) }}
-      />
-      <script
-        type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(reviewSchema) }}
       />
       <script
@@ -272,7 +220,7 @@ export default function AboutPage() {
           <div>
             <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-blue-400">About Us</p>
             <h1 className="mt-4 text-3xl font-extrabold leading-[1.1] tracking-tight text-white sm:text-4xl md:text-5xl">
-              Tuticorin&apos;s trusted washing machine service centre since 2014.
+              Your trusted washing machine service centre since 2014.
             </h1>
             <p className="mt-5 max-w-lg text-base leading-relaxed text-slate-300">
               KG Home Care is a family-run service with one mission — do one thing, washing machine service, and do it better than anyone else. Over 10 years and 5,000+ services later, we&apos;re still going strong.
@@ -318,13 +266,13 @@ export default function AboutPage() {
                 </h2>
                 <div className="mt-6 space-y-4 text-base leading-relaxed text-slate-600">
                   <p>
-                    What started as a small service centre in 2014 has grown into Tuticorin&apos;s most trusted washing machine service provider. We made a conscious decision early on — instead of being a general appliance service shop, we would specialise entirely in washing machines.
+                    What started as a small service centre in 2014 has grown into a trusted washing machine service provider. We made a conscious decision early on — instead of being a general appliance service shop, we would specialise entirely in washing machines.
                   </p>
                   <p>
                     That focus means our technicians know every model, every brand, and every common fault inside out. From a simple drum clean to complex PCB services, we handle it all with the same care and expertise.
                   </p>
                   <p>
-                    Today, we serve over 1,000 homes across Tuticorin and surrounding areas, with same-day doorstep service and a written warranty on every job.
+                    Today, we&apos;ve served over 1,000 happy homes, with same-day doorstep service and a written warranty on every job.
                   </p>
                 </div>
               </div>

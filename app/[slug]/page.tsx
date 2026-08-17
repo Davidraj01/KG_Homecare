@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Script from "next/script";
 import { notFound } from "next/navigation";
-import { BUSINESS, PHONE_DISPLAY, telHref, waHref, bookingMessage } from "@/lib/contact";
+import { BUSINESS } from "@/lib/contact";
 import { getPublishedSeoPageBySlug } from "@/lib/cms";
 import { Section } from "@/components/site/Section";
 import { ScrollReveal } from "@/components/site/ScrollReveal";
@@ -13,9 +13,8 @@ import {
   Clock,
   Wrench,
   Award,
-  Phone,
+  CalendarCheck,
 } from "lucide-react";
-import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
 
 type SeoPageProps = {
   params: Promise<{ slug: string }>;
@@ -136,15 +135,14 @@ export default async function SeoPage({ params }: SeoPageProps) {
     notFound();
   }
 
-  const location = page.location || BUSINESS.address.city;
+  const location = page.location || "your area";
 
   const schema = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     name: BUSINESS.name,
     description: page.subheading || BUSINESS.tagline,
-    telephone: PHONE_DISPLAY,
-    areaServed: page.location ? [page.location, BUSINESS.address.city] : [BUSINESS.address.city],
+    ...(page.location ? { areaServed: [page.location] } : {}),
     url: `https://kghomecare.in/${page.slug}`,
   };
 
@@ -246,23 +244,14 @@ export default async function SeoPage({ params }: SeoPageProps) {
                 ))}
               </ul>
 
-              {/* Hero CTA buttons */}
+              {/* Hero CTA button */}
               <div className="mt-8 flex flex-wrap gap-3">
                 <a
-                  href={telHref()}
+                  href="#book"
                   className="inline-flex items-center gap-2 rounded-xl bg-white px-6 py-3 text-sm font-bold text-primary shadow-lg transition-all hover:-translate-y-0.5"
                 >
-                  <Phone className="h-4 w-4" />
-                  {page.cta_text || `Call ${PHONE_DISPLAY}`}
-                </a>
-                <a
-                  href={waHref(bookingMessage({ location }))}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-2 rounded-xl border-2 border-white/30 bg-white/10 px-6 py-3 text-sm font-bold text-white backdrop-blur-sm transition-all hover:-translate-y-0.5 hover:bg-white/20"
-                >
-                  <WhatsAppIcon className="h-4 w-4" />
-                  WhatsApp
+                  <CalendarCheck className="h-4 w-4" />
+                  {page.cta_text || "Book Now"}
                 </a>
               </div>
             </div>
@@ -474,7 +463,7 @@ export default async function SeoPage({ params }: SeoPageProps) {
       ) : null}
 
       {/* ═══ 8. LEAD CAPTURE FORM ═══ */}
-      <div className="relative overflow-hidden bg-slate-50">
+      <div id="book" className="relative overflow-hidden bg-slate-50">
         <div aria-hidden className="pointer-events-none absolute inset-0 opacity-[0.3]" style={{ backgroundImage: "radial-gradient(#94a3b8 1.2px, transparent 1.2px)", backgroundSize: "28px 28px" }} />
         <div className="pointer-events-none absolute -right-28 top-1/2 h-60 w-60 -translate-y-1/2 rounded-full bg-blue-100/40 blur-[80px]" />
         <Section className="relative">
@@ -489,24 +478,6 @@ export default async function SeoPage({ params }: SeoPageProps) {
                 <p className="mt-4 text-base text-slate-500">
                   Professional doorstep service with genuine spare parts and a written warranty. Available all 7 days.
                 </p>
-                <div className="mt-6 flex flex-wrap gap-3">
-                  <a
-                    href={telHref()}
-                    className="inline-flex items-center gap-2 rounded-xl bg-primary px-5 py-2.5 text-sm font-bold text-white shadow-lift transition-all hover:-translate-y-0.5"
-                  >
-                    <Phone className="h-4 w-4" />
-                    Call {PHONE_DISPLAY}
-                  </a>
-                  <a
-                    href={waHref(bookingMessage({ location }))}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-5 py-2.5 text-sm font-bold text-slate-800 shadow-soft transition-all hover:-translate-y-0.5 hover:shadow-lift"
-                  >
-                    <WhatsAppIcon className="h-4 w-4 text-[#25d366]" />
-                    WhatsApp Us
-                  </a>
-                </div>
               </div>
               {/* Right — Form */}
               <div>

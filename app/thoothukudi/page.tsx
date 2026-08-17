@@ -3,32 +3,29 @@ import Link from "next/link";
 import Image from "next/image";
 import {
   CheckCircle,
-  Phone,
+  CalendarCheck,
   Wrench,
   ShieldCheck,
   Clock,
   Award,
-  MapPin,
   ArrowRight,
 } from "lucide-react";
-import { PHONE_DISPLAY, telHref, waHref, bookingMessage } from "@/lib/contact";
 import { Section } from "@/components/site/Section";
 import { ScrollReveal } from "@/components/site/ScrollReveal";
 import { ServiceHeroForm } from "@/components/site/ServiceHeroForm";
-import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
 import { ContactCTA } from "@/components/site/ContactCTA";
 
 export const metadata: Metadata = {
   title:
-    "Washing Machine Service in Thoothukudi | Same Day Doorstep Service — KG Home Care",
+    "Washing Machine Service | Same Day Doorstep Service — KG Home Care",
   description:
-    "Expert washing machine service, installation, drum cleaning & maintenance in Thoothukudi. Same day doorstep service for all models. Genuine parts, 90-day warranty. Call now.",
+    "Expert washing machine service, installation, drum cleaning & maintenance. Same day doorstep service for all models. Genuine parts, 90-day warranty.",
   keywords:
-    "washing machine service thoothukudi, washing machine service centre thoothukudi, washing machine installation thoothukudi, drum cleaning thoothukudi, pcb service thoothukudi, motor service thoothukudi",
+    "washing machine service, washing machine service centre, washing machine installation, drum cleaning, pcb service, motor service",
   openGraph: {
-    title: "Washing Machine Service in Thoothukudi — KG Home Care",
+    title: "Washing Machine Service — KG Home Care",
     description:
-      "Doorstep washing machine service, installation & maintenance in Thoothukudi. Same day service, genuine parts, 90-day warranty.",
+      "Doorstep washing machine service, installation & maintenance. Same day service, genuine parts, 90-day warranty.",
     url: "/thoothukudi",
   },
   alternates: { canonical: "/thoothukudi" },
@@ -80,29 +77,6 @@ const SERVICE_LINKS = [
   },
 ];
 
-const AREAS_SERVED = [
-  "Thoothukudi Town",
-  "Caldwell Colony",
-  "Bryant Nagar",
-  "Millerpuram",
-  "Polpettai",
-  "Muthiahpuram",
-  "Sivagnanapuram",
-  "Thermal Nagar",
-  "Kamaraj Nagar",
-  "VOC Nagar",
-  "Ettayapuram Road",
-  "Palayamkottai Road",
-  "SBI Colony",
-  "Harbour Area",
-  "Toovipuram",
-  "Udangudi",
-  "Eral",
-  "Kayathar",
-];
-
-
-
 export default function ThoothukudiPage() {
   return (
     <>
@@ -111,7 +85,7 @@ export default function ThoothukudiPage() {
         <div className="absolute inset-0 z-0 bg-[#07090f]">
           <Image
             src="/hero-bg-2.png"
-            alt="Washing machine service in Thoothukudi"
+            alt="Washing machine service"
             fill
             className="object-cover object-right sm:object-center"
             priority
@@ -138,16 +112,16 @@ export default function ThoothukudiPage() {
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75"></span>
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-green-400"></span>
                 </span>
-                Serving Thoothukudi · Same Day Service
+                Same Day Service
               </span>
 
               <h1 className="mt-6 text-4xl font-extrabold leading-[1.1] tracking-tight text-white sm:text-5xl lg:text-[3.5rem]">
-                Washing Machine Service Centre in Thoothukudi
+                Washing Machine Service Centre
               </h1>
 
               <p className="mt-6 max-w-xl text-base leading-relaxed text-white/70 md:text-lg">
                 Professional doorstep washing machine service, installation &
-                deep cleaning in Thoothukudi. Same day visit by certified
+                deep cleaning. Same day visit by certified
                 technicians with genuine spare parts and 90-day service warranty.
               </p>
 
@@ -170,22 +144,11 @@ export default function ThoothukudiPage() {
 
               <div className="mt-8 flex flex-wrap gap-3">
                 <a
-                  href={telHref()}
+                  href="#book"
                   className="inline-flex items-center gap-2 rounded-xl bg-white px-6 py-3 text-sm font-bold text-primary shadow-lg transition-all hover:-translate-y-0.5"
                 >
-                  <Phone className="h-4 w-4" />
-                  Call {PHONE_DISPLAY}
-                </a>
-                <a
-                  href={waHref(
-                    bookingMessage({ location: "Thoothukudi" })
-                  )}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-2 rounded-xl border-2 border-white/30 bg-white/10 px-6 py-3 text-sm font-bold text-white backdrop-blur-sm transition-all hover:-translate-y-0.5 hover:bg-white/20"
-                >
-                  <WhatsAppIcon className="h-4 w-4" />
-                  WhatsApp
+                  <CalendarCheck className="h-4 w-4" />
+                  Book Now
                 </a>
               </div>
             </div>
@@ -211,7 +174,7 @@ export default function ThoothukudiPage() {
         <div className="pointer-events-none absolute -right-20 top-1/4 h-72 w-72 rounded-full bg-blue-100/40 blur-[100px]" />
         <Section
           eyebrow="Our Services"
-          title="What We Do in Thoothukudi"
+          title="What We Do"
           description="From simple fixes to complex board-level services — our certified technicians handle it all at your doorstep. Click on any service to learn more."
           className="relative"
         >
@@ -278,40 +241,6 @@ export default function ThoothukudiPage() {
         </Section>
       </div>
 
-      {/* ═══ AREAS SERVED ═══ */}
-      <div className="relative overflow-hidden bg-slate-50">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0 opacity-[0.3]"
-          style={{
-            backgroundImage:
-              "radial-gradient(#94a3b8 1.2px, transparent 1.2px)",
-            backgroundSize: "26px 26px",
-          }}
-        />
-        <Section
-          eyebrow="Service Coverage"
-          title="Areas We Serve in Thoothukudi"
-          description="Our technicians cover all major areas and colonies in Thoothukudi and surrounding regions."
-          align="center"
-          className="relative"
-        >
-          <ScrollReveal>
-            <div className="mx-auto flex max-w-4xl flex-wrap justify-center gap-2.5">
-              {AREAS_SERVED.map((area) => (
-                <span
-                  key={area}
-                  className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm text-slate-600 shadow-sm"
-                >
-                  <MapPin className="h-3.5 w-3.5 text-primary" />
-                  {area}
-                </span>
-              ))}
-            </div>
-          </ScrollReveal>
-        </Section>
-      </div>
-
       {/* ═══ WHY CHOOSE US ═══ */}
       <div className="relative overflow-hidden bg-white">
         <div
@@ -325,7 +254,7 @@ export default function ThoothukudiPage() {
         />
         <Section
           eyebrow="Why KG Home Care"
-          title="Why Thoothukudi Trusts Us"
+          title="Why Customers Trust Us"
           align="center"
           className="relative"
         >

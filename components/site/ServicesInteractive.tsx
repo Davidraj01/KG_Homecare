@@ -14,7 +14,7 @@ import {
   Box,
   ArrowUpRight,
 } from "lucide-react";
-import { SERVICES, bookingMessage, waHref } from "@/lib/contact";
+import { SERVICES } from "@/lib/contact";
 import type { ServiceRecord } from "@/lib/cms";
 
 /* ── icon map ─────────────────────────────────────────────── */
@@ -203,14 +203,12 @@ export function ServicesInteractive({
             >
               Learn More →
             </Link>
-            <a
-              href={waHref(bookingMessage({ service: active.name }))}
-              target="_blank"
-              rel="noreferrer"
+            <Link
+              href="/contact"
               className="inline-flex items-center gap-1.5 rounded-xl bg-primary px-4 py-2 text-sm font-semibold text-white shadow-soft transition-colors hover:bg-primary/90"
             >
               Book Now <ArrowUpRight className="h-4 w-4" />
-            </a>
+            </Link>
           </div>
         </div>
       </div>

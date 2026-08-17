@@ -1,519 +1,159 @@
 import type { Metadata } from "next";
-import Image from "next/image";
-import Script from "next/script";
-import { notFound } from "next/navigation";
-import { BUSINESS, PHONE_DISPLAY, telHref, waHref, bookingMessage } from "@/lib/contact";
-import { getPublishedSeoPageBySlug } from "@/lib/cms";
+import { BUSINESS } from "@/lib/contact";
+import { getPublicServices } from "@/lib/cms";
 import { Section } from "@/components/site/Section";
 import { ScrollReveal } from "@/components/site/ScrollReveal";
-import { ServiceHeroForm } from "@/components/site/ServiceHeroForm";
-import {
-  Star,
-  ShieldCheck,
-  Clock,
-  Wrench,
-  Award,
-  Phone,
-} from "lucide-react";
-import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
-
-type SeoPageProps = {
-  params: Promise<{ slug: string }>;
-};
+import { Hero } from "@/components/site/Hero";
+import { TrustStats } from "@/components/site/TrustStats";
+import { WhyChooseUs } from "@/components/site/WhyChooseUs";
+import { HowItWorks } from "@/components/site/HowItWorks";
+import { CommonProblems } from "@/components/site/CommonProblems";
+import { WarrantyBanner } from "@/components/site/WarrantyBanner";
+import { Reviews } from "@/components/site/Reviews";
+import { FaqAccordion } from "@/components/site/FaqAccordion";
+import { HomeContact } from "@/components/site/HomeContact";
+import { ServicesGrid } from "@/components/site/ServicesGrid";
 
 export const revalidate = 60;
 
-export async function generateStaticParams() {
-  const { getPublishedSeoPages } = await import("@/lib/cms");
-  const pages = await getPublishedSeoPages();
-  return pages.map((page) => ({ slug: page.slug }));
-}
+export const metadata: Metadata = {
+  title: `${BUSINESS.name} — ${BUSINESS.tagline}`,
+  description:
+    "Professional washing machine repair, installation, drum cleaning and maintenance. Certified technicians, genuine parts, 90-day warranty.",
+  alternates: { canonical: "/" },
+  openGraph: {
+    title: `${BUSINESS.name} — ${BUSINESS.tagline}`,
+    description: "Professional washing machine service. Same-day service, genuine parts, 90-day warranty.",
+    url: "/",
+  },
+};
 
-export async function generateMetadata({ params }: SeoPageProps): Promise<Metadata> {
-  const { slug } = await params;
-  const page = await getPublishedSeoPageBySlug(slug);
-
-  if (!page) {
-    return {};
-  }
-
-  // Parse raw HTML head tags from admin into Next.js metadata
-  const parsed = parseRawHeadTags(page.other_tags);
-
-  return {
-    title: { absolute: parsed.title || page.heading || page.title },
-    ...(parsed.description ? { description: parsed.description } : {}),
-    ...(parsed.keywords ? { keywords: parsed.keywords } : {}),
-    ...(parsed.canonical ? { alternates: { canonical: parsed.canonical } } : {
-      alternates: { canonical: `https://kghomecare.in/${page.slug}` },
-    }),
-    ...(parsed.robots ? { robots: parsed.robots } : {}),
-    openGraph: {
-      title: parsed.ogTitle || parsed.title || page.heading || page.title,
-      ...(parsed.ogDescription || parsed.description ? { description: parsed.ogDescription || parsed.description } : {}),
-      url: parsed.ogUrl || `https://kghomecare.in/${page.slug}`,
-      ...(parsed.ogImage ? { images: [parsed.ogImage] } : {}),
-      ...(parsed.ogType ? { type: parsed.ogType as "website" | "article" } : {}),
-    },
-    other: parsed.otherMeta,
-  };
-}
-
-/**
- * Parse raw HTML head tags string into structured metadata.
- * Extracts: <title>, <meta>, <link rel="canonical">
- */
-function parseRawHeadTags(raw: string | null) {
-  const result = {
-    title: "",
-    description: "",
-    keywords: "",
-    canonical: "",
-    robots: "",
-    ogTitle: "",
-    ogDescription: "",
-    ogImage: "",
-    ogUrl: "",
-    ogType: "",
-    otherMeta: {} as Record<string, string>,
-  };
-
-  if (!raw) return result;
-
-  // Extract <title>...</title>
-  const titleMatch = raw.match(/<title[^>]*>([\s\S]*?)<\/title>/i);
-  if (titleMatch) result.title = titleMatch[1].trim();
-
-  // Extract <link rel="canonical" href="...">
-  const canonicalMatch = raw.match(/<link[^>]*rel=["']canonical["'][^>]*href=["']([^"']+)["'][^>]*\/?>/i)
-    || raw.match(/<link[^>]*href=["']([^"']+)["'][^>]*rel=["']canonical["'][^>]*\/?>/i);
-  if (canonicalMatch) result.canonical = canonicalMatch[1].trim();
-
-  // Extract all <meta> tags
-  const metaRegex = /<meta[^>]+\/?>/gi;
-  const metaTags = raw.match(metaRegex) || [];
-
-  for (const tag of metaTags) {
-    const nameMatch = tag.match(/name=["']([^"']+)["']/i);
-    const propertyMatch = tag.match(/property=["']([^"']+)["']/i);
-    const contentMatch = tag.match(/content=["']([^"']+)["']/i);
-
-    const content = contentMatch?.[1] || "";
-    const name = nameMatch?.[1]?.toLowerCase() || "";
-    const property = propertyMatch?.[1]?.toLowerCase() || "";
-
-    if (name === "description") {
-      result.description = content;
-    } else if (name === "keywords") {
-      result.keywords = content;
-    } else if (name === "robots") {
-      result.robots = content;
-    } else if (property === "og:title") {
-      result.ogTitle = content;
-    } else if (property === "og:description") {
-      result.ogDescription = content;
-    } else if (property === "og:image") {
-      result.ogImage = content;
-    } else if (property === "og:url") {
-      result.ogUrl = content;
-    } else if (property === "og:type") {
-      result.ogType = content;
-    } else if (name && content) {
-      result.otherMeta[name] = content;
-    } else if (property && content && !property.startsWith("og:")) {
-      result.otherMeta[property] = content;
-    }
-  }
-
-  return result;
-}
-
-export default async function SeoPage({ params }: SeoPageProps) {
-  const { slug } = await params;
-  const page = await getPublishedSeoPageBySlug(slug);
-
-  if (!page) {
-    notFound();
-  }
-
-  const location = page.location || BUSINESS.address.city;
-
-  const schema = {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    name: BUSINESS.name,
-    description: page.subheading || BUSINESS.tagline,
-    telephone: PHONE_DISPLAY,
-    areaServed: page.location ? [page.location, BUSINESS.address.city] : [BUSINESS.address.city],
-    url: `https://kghomecare.in/${page.slug}`,
-  };
-
-  const faqSchema =
-    page.faq.length > 0
-      ? {
-          "@context": "https://schema.org",
-          "@type": "FAQPage",
-          mainEntity: page.faq.map((item) => ({
-            "@type": "Question",
-            name: item.question,
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: item.answer,
-            },
-          })),
-        }
-      : null;
+export default async function HomePage() {
+  const services = await getPublicServices();
 
   return (
     <>
-      <Script id={`seo-page-schema-${page.id}`} type="application/ld+json">
-        {JSON.stringify(schema)}
-      </Script>
-      {faqSchema ? (
-        <Script id={`seo-page-faq-${page.id}`} type="application/ld+json">
-          {JSON.stringify(faqSchema)}
-        </Script>
-      ) : null}
+      <Hero />
+      <TrustStats />
 
-      {/* ═══ 1. HERO SECTION ═══ */}
-      <section className="dark relative overflow-hidden min-h-[720px] flex flex-col justify-center text-foreground">
-        {/* Background Image */}
-        <div className="absolute inset-0 z-0 bg-[#07090f]">
-          {page.image_url ? (
-            <img
-              src={page.image_url}
-              alt={page.heading || page.title}
-              className="h-full w-full object-cover object-right sm:object-center"
-            />
-          ) : (
-            <Image
-              src="/hero-bg-2.png"
-              alt="Washing machine service background"
-              fill
-              className="object-cover object-right sm:object-center"
-              priority
-            />
-          )}
-          {/* Gradient Overlays */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#07090f] from-10% via-[#07090f]/85 via-50% to-transparent sm:via-[#07090f]/60 sm:to-[#07090f]/20" />
-          <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#07090f] to-transparent" />
-        </div>
-
-        {/* Dot grid overlay */}
+      <div className="relative overflow-hidden bg-white">
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-0 z-[1] opacity-[0.04]"
-          style={{ backgroundImage: "radial-gradient(rgba(255,255,255,1) 1px, transparent 1px)", backgroundSize: "30px 30px" }}
+          className="pointer-events-none absolute inset-0 opacity-[0.09]"
+          style={{ backgroundImage: "radial-gradient(#94a3b8 1.2px, transparent 1.2px)", backgroundSize: "28px 28px" }}
         />
+        <Section
+          eyebrow="Our Services"
+          title="Complete washing machine care"
+          description="From repair to installation, our certified technicians handle every washing machine issue at your doorstep."
+          className="relative"
+        >
+          <ScrollReveal>
+            <ServicesGrid limit={8} items={services} />
+          </ScrollReveal>
+        </Section>
+      </div>
 
-        {/* Content */}
-        <div className="relative z-10 mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 md:py-24 lg:px-8">
-          <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
-            {/* Left — Content */}
-            <div className="animate-fade-up">
-              <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-medium text-white/90 backdrop-blur-md">
-                <span className="relative flex h-2 w-2">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75"></span>
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-green-400"></span>
-                </span>
-                Serving {location} · Same Day Service
-              </span>
-
-              <h1 className="mt-6 text-4xl font-extrabold leading-[1.1] tracking-tight text-white sm:text-5xl lg:text-[3.5rem]">
-                {page.heading || page.title}
-              </h1>
-
-              {page.subheading ? (
-                <p className="mt-6 max-w-xl text-base leading-relaxed text-white/70 md:text-lg">
-                  {page.subheading}
-                </p>
-              ) : null}
-
-              <ul className="mt-8 flex flex-wrap gap-x-3 gap-y-3">
-                {[
-                  { icon: Clock, label: "Same Day Service" },
-                  { icon: Award, label: "Genuine Parts" },
-                  { icon: ShieldCheck, label: "90-Day Warranty" },
-                  { icon: Wrench, label: "Expert Technicians" },
-                ].map((b) => (
-                  <li
-                    key={b.label}
-                    className="inline-flex items-center gap-2 rounded-full border border-white/5 bg-white/5 px-3.5 py-1.5 text-xs font-medium text-white/80 backdrop-blur-sm"
-                  >
-                    <b.icon className="h-3.5 w-3.5 text-green-400" />
-                    {b.label}
-                  </li>
-                ))}
-              </ul>
-
-              {/* Hero CTA buttons */}
-              <div className="mt-8 flex flex-wrap gap-3">
-                <a
-                  href={telHref()}
-                  className="inline-flex items-center gap-2 rounded-xl bg-white px-6 py-3 text-sm font-bold text-primary shadow-lg transition-all hover:-translate-y-0.5"
-                >
-                  <Phone className="h-4 w-4" />
-                  {page.cta_text || `Call ${PHONE_DISPLAY}`}
-                </a>
-                <a
-                  href={waHref(bookingMessage({ location }))}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-2 rounded-xl border-2 border-white/30 bg-white/10 px-6 py-3 text-sm font-bold text-white backdrop-blur-sm transition-all hover:-translate-y-0.5 hover:bg-white/20"
-                >
-                  <WhatsAppIcon className="h-4 w-4" />
-                  WhatsApp
-                </a>
-              </div>
-            </div>
-
-            {/* Right — Lead capture form */}
-            <div className="hidden lg:block">
-              <ServiceHeroForm />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ═══ 2. CONTENT (left) + IMAGE (right) ═══ */}
-      {(page.section2_heading || page.section2_content) ? (
-        <div className="relative overflow-hidden bg-white">
-          <div aria-hidden className="pointer-events-none absolute inset-0 opacity-[0.09]" style={{ backgroundImage: "radial-gradient(#94a3b8 1.2px, transparent 1.2px)", backgroundSize: "28px 28px" }} />
-          <div className="pointer-events-none absolute -right-20 top-1/4 h-72 w-72 rounded-full bg-blue-100/40 blur-[100px]" />
-          <Section className="relative">
-            <ScrollReveal>
-              <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
-                {/* Left — Text content */}
-                <div>
-                  {page.section2_subheading ? (
-                    <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-primary">
-                      {page.section2_subheading}
-                    </p>
-                  ) : null}
-                  {page.section2_heading ? (
-                    <h2 className="mt-2 text-2xl font-extrabold tracking-tight text-slate-900 sm:text-3xl">
-                      {page.section2_heading}
-                    </h2>
-                  ) : null}
-                  {page.section2_content ? (
-                    <div
-                      className="mt-6 prose prose-slate max-w-none prose-headings:font-extrabold prose-headings:tracking-tight prose-h2:text-xl prose-h3:text-lg prose-p:leading-relaxed prose-p:text-slate-600 prose-li:text-slate-600 prose-strong:text-slate-900"
-                      dangerouslySetInnerHTML={{ __html: page.section2_content }}
-                    />
-                  ) : null}
-                </div>
-                {/* Right — Image */}
-                <div className="flex justify-center lg:justify-end">
-                  {page.section2_image_url ? (
-                    <img
-                      src={page.section2_image_url}
-                      alt={page.section2_heading || "Section image"}
-                      className="aspect-[3/4] w-full max-w-md rounded-2xl border border-slate-100 object-cover shadow-lift"
-                    />
-                  ) : (
-                    <div className="grid aspect-[3/4] w-full max-w-md place-items-center rounded-2xl border border-slate-100 bg-slate-50">
-                      <span className="text-sm text-slate-400">Image</span>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </ScrollReveal>
-          </Section>
-        </div>
-      ) : null}
-
-      {/* ═══ 3. CONTENT BLOCK ═══ */}
-      {(page.section3_heading || page.section3_content) ? (
-        <div className="relative overflow-hidden bg-slate-50">
-          <div aria-hidden className="pointer-events-none absolute inset-0 opacity-[0.3]" style={{ backgroundImage: "linear-gradient(to right, #cbd5e1 1px, transparent 1px), linear-gradient(to bottom, #cbd5e1 1px, transparent 1px)", backgroundSize: "50px 50px" }} />
-          <div className="pointer-events-none absolute -left-20 bottom-0 h-60 w-60 rounded-full bg-indigo-100/30 blur-[80px]" />
-          <Section className="relative">
-            <ScrollReveal>
-              <div>
-                {page.section3_heading ? (
-                  <h2 className="text-2xl font-extrabold tracking-tight text-slate-900 sm:text-3xl">
-                    {page.section3_heading}
-                  </h2>
-                ) : null}
-                {page.section3_content ? (
-                  <div
-                    className="mt-6 prose prose-slate max-w-none prose-headings:font-extrabold prose-headings:tracking-tight prose-h2:text-xl prose-h3:text-lg prose-p:leading-relaxed prose-p:text-slate-600 prose-li:text-slate-600 prose-strong:text-slate-900"
-                    dangerouslySetInnerHTML={{ __html: page.section3_content }}
-                  />
-                ) : null}
-              </div>
-            </ScrollReveal>
-          </Section>
-        </div>
-      ) : null}
-
-      {/* ═══ 4. CONTENT BLOCK ═══ */}
-      {(page.section4_heading || page.section4_content) ? (
-        <div className="relative overflow-hidden bg-white">
-          <div aria-hidden className="pointer-events-none absolute inset-0 opacity-[0.25]" style={{ backgroundImage: "radial-gradient(#cbd5e1 1px, transparent 1px)", backgroundSize: "30px 30px" }} />
-          <div className="pointer-events-none absolute -left-32 top-1/4 h-72 w-72 rounded-full bg-blue-100/20 blur-[100px]" />
-          <Section className="relative">
-            <ScrollReveal>
-              <div>
-                {page.section4_heading ? (
-                  <h2 className="text-2xl font-extrabold tracking-tight text-slate-900 sm:text-3xl">
-                    {page.section4_heading}
-                  </h2>
-                ) : null}
-                {page.section4_content ? (
-                  <div
-                    className="mt-6 prose prose-slate max-w-none prose-headings:font-extrabold prose-headings:tracking-tight prose-h2:text-xl prose-h3:text-lg prose-p:leading-relaxed prose-p:text-slate-600 prose-li:text-slate-600 prose-strong:text-slate-900"
-                    dangerouslySetInnerHTML={{ __html: page.section4_content }}
-                  />
-                ) : null}
-              </div>
-            </ScrollReveal>
-          </Section>
-        </div>
-      ) : null}
-
-      {/* ═══ 5. CONTENT BLOCK ═══ */}
-      {(page.section5_heading || page.section5_content) ? (
-        <div className="relative overflow-hidden bg-slate-50">
-          <div aria-hidden className="pointer-events-none absolute inset-0 opacity-[0.3]" style={{ backgroundImage: "linear-gradient(to right, #cbd5e1 1px, transparent 1px), linear-gradient(to bottom, #cbd5e1 1px, transparent 1px)", backgroundSize: "50px 50px" }} />
-          <div className="pointer-events-none absolute -right-20 bottom-0 h-60 w-60 rounded-full bg-violet-100/30 blur-[80px]" />
-          <Section className="relative">
-            <ScrollReveal>
-              <div>
-                {page.section5_heading ? (
-                  <h2 className="text-2xl font-extrabold tracking-tight text-slate-900 sm:text-3xl">
-                    {page.section5_heading}
-                  </h2>
-                ) : null}
-                {page.section5_content ? (
-                  <div
-                    className="mt-6 prose prose-slate max-w-none prose-headings:font-extrabold prose-headings:tracking-tight prose-h2:text-xl prose-h3:text-lg prose-p:leading-relaxed prose-p:text-slate-600 prose-li:text-slate-600 prose-strong:text-slate-900"
-                    dangerouslySetInnerHTML={{ __html: page.section5_content }}
-                  />
-                ) : null}
-              </div>
-            </ScrollReveal>
-          </Section>
-        </div>
-      ) : null}
-
-      {/* ═══ 6. TESTIMONIALS ═══ */}
-      {page.testimonials.length > 0 ? (
-        <div className="relative overflow-hidden bg-slate-50">
-          <div aria-hidden className="pointer-events-none absolute inset-0 opacity-[0.3]" style={{ backgroundImage: "radial-gradient(#94a3b8 1.2px, transparent 1.2px)", backgroundSize: "26px 26px" }} />
-          <div className="pointer-events-none absolute -left-20 bottom-0 h-60 w-60 rounded-full bg-blue-100/30 blur-[80px]" />
-          <div className="pointer-events-none absolute right-16 top-12 h-24 w-24 rounded-full border-[3px] border-primary/12" />
-          <Section
-            eyebrow="Customer Reviews"
-            title={`Loved by Homes in ${location}`}
-            align="center"
-            className="relative"
-          >
-            <ScrollReveal>
-              <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-                {page.testimonials.map((item, index) => (
-                  <div
-                    key={`${item.name}-${index}`}
-                    className="rounded-2xl border border-slate-100 bg-white p-6 shadow-soft transition-all hover:-translate-y-0.5 hover:shadow-lift"
-                  >
-                    {/* Star rating */}
-                    <div className="flex gap-0.5">
-                      {Array.from({ length: item.rating || 5 }).map((_, i) => (
-                        <Star key={i} className="h-4 w-4 fill-amber-400 text-amber-400" />
-                      ))}
-                    </div>
-                    <p className="mt-3 text-sm leading-relaxed text-slate-600">&ldquo;{item.review}&rdquo;</p>
-                    <div className="mt-4 flex items-center gap-3 border-t border-slate-100 pt-4">
-                      <span className="grid h-9 w-9 place-items-center rounded-full bg-primary/10 text-xs font-bold text-primary">
-                        {item.name[0]}
-                      </span>
-                      <div>
-                        <p className="text-sm font-semibold text-slate-900">{item.name}</p>
-                        {item.trip ? (
-                          <p className="text-[11px] text-slate-500">{item.trip}</p>
-                        ) : null}
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </ScrollReveal>
-          </Section>
-        </div>
-      ) : null}
-
-      {/* ═══ 7. FAQ ═══ */}
-      {page.faq.length > 0 ? (
-        <div className="relative overflow-hidden bg-white">
-          <div aria-hidden className="pointer-events-none absolute inset-0 opacity-[0.25]" style={{ backgroundImage: "linear-gradient(to right, #cbd5e1 1px, transparent 1px), linear-gradient(to bottom, #cbd5e1 1px, transparent 1px)", backgroundSize: "50px 50px" }} />
-          <div className="pointer-events-none absolute -right-20 top-1/3 h-60 w-60 rounded-full bg-indigo-100/30 blur-[80px]" />
-          <div className="pointer-events-none absolute left-8 top-6 h-20 w-20 rounded-full border-[3px] border-slate-300/50" />
-          <Section
-            eyebrow="FAQ"
-            title={`Frequently Asked Questions — ${location}`}
-            align="center"
-            className="relative"
-          >
-            <ScrollReveal>
-              <div className="mx-auto max-w-3xl space-y-4">
-                {page.faq.map((item, i) => (
-                  <div key={i} className="rounded-2xl border border-slate-100 bg-white p-6 shadow-soft">
-                    <h3 className="flex items-start gap-3 text-base font-bold text-slate-900">
-                      <span className="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-primary/10 text-xs font-bold text-primary">
-                        Q
-                      </span>
-                      {item.question}
-                    </h3>
-                    <p className="mt-3 pl-9 text-sm leading-relaxed text-slate-600">{item.answer}</p>
-                  </div>
-                ))}
-              </div>
-            </ScrollReveal>
-          </Section>
-        </div>
-      ) : null}
-
-      {/* ═══ 8. LEAD CAPTURE FORM ═══ */}
       <div className="relative overflow-hidden bg-slate-50">
-        <div aria-hidden className="pointer-events-none absolute inset-0 opacity-[0.3]" style={{ backgroundImage: "radial-gradient(#94a3b8 1.2px, transparent 1.2px)", backgroundSize: "28px 28px" }} />
-        <div className="pointer-events-none absolute -right-28 top-1/2 h-60 w-60 -translate-y-1/2 rounded-full bg-blue-100/40 blur-[80px]" />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 opacity-[0.3]"
+          style={{ backgroundImage: "linear-gradient(to right, #cbd5e1 1px, transparent 1px), linear-gradient(to bottom, #cbd5e1 1px, transparent 1px)", backgroundSize: "50px 50px" }}
+        />
+        <Section
+          eyebrow="Common Issues"
+          title="We fix these every day"
+          description="Whatever's wrong with your washing machine, chances are we've fixed it hundreds of times before."
+          className="relative"
+        >
+          <ScrollReveal>
+            <CommonProblems />
+          </ScrollReveal>
+        </Section>
+      </div>
+
+      <div className="relative overflow-hidden bg-[#07090f]">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 opacity-[0.05]"
+          style={{ backgroundImage: "radial-gradient(rgba(255,255,255,0.8) 1px, transparent 1px)", backgroundSize: "28px 28px" }}
+        />
+        <div className="pointer-events-none absolute -left-24 -top-24 h-72 w-72 rounded-full bg-blue-600/20 blur-[90px]" />
+        <div className="pointer-events-none absolute -bottom-20 -right-20 h-64 w-64 rounded-full bg-primary/25 blur-[80px]" />
         <Section className="relative">
-          <div className="mx-auto max-w-5xl">
-            <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
-              {/* Left — text */}
-              <div>
-                <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-primary">Get Started</p>
-                <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-900">
-                  Book Washing Machine Service in {location}
-                </h2>
-                <p className="mt-4 text-base text-slate-500">
-                  Professional doorstep service with genuine spare parts and a written warranty. Available all 7 days.
-                </p>
-                <div className="mt-6 flex flex-wrap gap-3">
-                  <a
-                    href={telHref()}
-                    className="inline-flex items-center gap-2 rounded-xl bg-primary px-5 py-2.5 text-sm font-bold text-white shadow-lift transition-all hover:-translate-y-0.5"
-                  >
-                    <Phone className="h-4 w-4" />
-                    Call {PHONE_DISPLAY}
-                  </a>
-                  <a
-                    href={waHref(bookingMessage({ location }))}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-5 py-2.5 text-sm font-bold text-slate-800 shadow-soft transition-all hover:-translate-y-0.5 hover:shadow-lift"
-                  >
-                    <WhatsAppIcon className="h-4 w-4 text-[#25d366]" />
-                    WhatsApp Us
-                  </a>
-                </div>
-              </div>
-              {/* Right — Form */}
-              <div>
-                <ServiceHeroForm />
-              </div>
+          <ScrollReveal>
+            <WhyChooseUs />
+          </ScrollReveal>
+        </Section>
+      </div>
+
+      <div className="relative overflow-hidden bg-white">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 opacity-[0.25]"
+          style={{ backgroundImage: "radial-gradient(#cbd5e1 1px, transparent 1px)", backgroundSize: "30px 30px" }}
+        />
+        <Section
+          eyebrow="How It Works"
+          title="Booked in 2 minutes, fixed same day"
+          align="center"
+          className="relative"
+        >
+          <ScrollReveal>
+            <HowItWorks />
+          </ScrollReveal>
+        </Section>
+      </div>
+
+      <Section className="bg-white">
+        <ScrollReveal>
+          <WarrantyBanner />
+        </ScrollReveal>
+      </Section>
+
+      <div className="relative overflow-hidden bg-slate-50">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 opacity-[0.3]"
+          style={{ backgroundImage: "radial-gradient(#94a3b8 1.2px, transparent 1.2px)", backgroundSize: "26px 26px" }}
+        />
+        <Section
+          eyebrow="Customer Reviews"
+          title="Loved by happy customers"
+          align="center"
+          className="relative"
+        >
+          <ScrollReveal>
+            <Reviews />
+          </ScrollReveal>
+        </Section>
+      </div>
+
+      <div className="relative overflow-hidden bg-white">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 opacity-[0.25]"
+          style={{ backgroundImage: "linear-gradient(to right, #cbd5e1 1px, transparent 1px), linear-gradient(to bottom, #cbd5e1 1px, transparent 1px)", backgroundSize: "50px 50px" }}
+        />
+        <Section eyebrow="FAQ" title="Frequently asked questions" align="center" className="relative">
+          <ScrollReveal>
+            <div className="mx-auto max-w-3xl">
+              <FaqAccordion />
             </div>
-          </div>
+          </ScrollReveal>
+        </Section>
+      </div>
+
+      <div className="relative overflow-hidden bg-slate-50">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 opacity-[0.3]"
+          style={{ backgroundImage: "radial-gradient(#94a3b8 1.2px, transparent 1.2px)", backgroundSize: "28px 28px" }}
+        />
+        <Section eyebrow="Get In Touch" title="Book your service today" className="relative">
+          <ScrollReveal>
+            <HomeContact />
+          </ScrollReveal>
         </Section>
       </div>
     </>

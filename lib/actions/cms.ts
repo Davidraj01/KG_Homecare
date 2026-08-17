@@ -8,7 +8,7 @@ import {
   parseFaqText,
   parseTestimonialsText,
   slugify,
-} from "@/lib/cms";
+} from "@/lib/cms.types";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 import { hasSupabaseEnv } from "@/lib/supabase/env";
 
@@ -144,24 +144,9 @@ export async function createLeadAction(
 
   revalidateLeads();
 
-  // Build WhatsApp redirect URL with lead info
-  const WHATSAPP_RAW = "918778838405";
-  const lines = [
-    "Hi KG Home Care, I'd like to book a washing machine service.",
-    "",
-    `Name: ${name}`,
-    `Phone: ${phone}`,
-    location ? `Location: ${location}` : null,
-    service ? `Service: ${service}` : null,
-    brand ? `Brand: ${brand}` : null,
-    message ? `Issue: ${message}` : null,
-  ].filter(Boolean);
-  const waMessage = lines.join("\n");
-  const waUrl = `https://wa.me/${WHATSAPP_RAW}?text=${encodeURIComponent(waMessage)}`;
-
   return {
     success: true,
-    message: waUrl,
+    message: "Thanks! We've received your request and will get back to you shortly.",
   };
 }
 

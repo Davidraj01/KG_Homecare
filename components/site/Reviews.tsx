@@ -7,16 +7,14 @@ const REVIEWS = [
   {
     initials: "PS",
     name: "Priya Sundaram",
-    area: "Tiruchendur",
     date: "May 2026",
     rating: 5,
-    text: "Booked at 10 AM, technician arrived by noon and fixed the door lock. Very professional and the pricing was transparent from the start.",
+    text: "Booked in the morning, technician arrived by noon and fixed the door lock. Very professional and the pricing was transparent from the start.",
     color: "bg-blue-600",
   },
   {
     initials: "KR",
     name: "Karthik Raja",
-    area: "Thoothukudi",
     date: "Apr 2026",
     rating: 5,
     text: "PCB on my washing machine was dead. They diagnosed it, ordered the genuine part and fixed it in 2 days. Saved me from buying a new machine.",
@@ -25,7 +23,6 @@ const REVIEWS = [
   {
     initials: "AM",
     name: "Anitha Murugan",
-    area: "Thoothukudi",
     date: "Apr 2026",
     rating: 5,
     text: "Excellent drum cleaning. The technician explained everything, removed all the bad smell and even cleaned the gasket. Worth every rupee.",
@@ -34,7 +31,6 @@ const REVIEWS = [
   {
     initials: "VK",
     name: "Vignesh Kumar",
-    area: "Ettayapuram",
     date: "Mar 2026",
     rating: 5,
     text: "Same-day service, genuine spare part, 90-day warranty. KG Home Care is now our go-to for anything washing machine.",
@@ -43,7 +39,6 @@ const REVIEWS = [
   {
     initials: "MS",
     name: "Meena Selvam",
-    area: "Sathankulam",
     date: "Mar 2026",
     rating: 5,
     text: "Quick response within the hour. Technician fixed the water leakage on the spot and explained what caused it. Highly recommend.",
@@ -52,7 +47,6 @@ const REVIEWS = [
   {
     initials: "SB",
     name: "Suresh Babu",
-    area: "Kovilpatti",
     date: "Feb 2026",
     rating: 5,
     text: "Called for a service and the technician arrived within an hour. Cleaned thoroughly, replaced the worn belt. Machine runs like new. Very professional work.",
@@ -116,7 +110,7 @@ export function Reviews() {
                 </span>
                 <div className="min-w-0">
                   <p className="truncate text-sm font-bold text-slate-900">{r.name}</p>
-                  <p className="text-xs text-slate-400">{r.area} · {r.date}</p>
+                  <p className="text-xs text-slate-400">{r.date}</p>
                 </div>
               </div>
 

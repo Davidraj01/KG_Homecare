@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Section } from "@/components/site/Section";
 import { ContactCTA } from "@/components/site/ContactCTA";
-import { SERVICES, BRANDS, bookingMessage, waHref } from "@/lib/contact";
+import { SERVICES, BRANDS } from "@/lib/contact";
 import { getPublicServiceBySlug } from "@/lib/cms";
 import { Check, ArrowRight, ShieldCheck, Wrench, Clock } from "lucide-react";
 
@@ -87,7 +87,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title:
       "meta_title" in service && service.meta_title
         ? service.meta_title
-        : `${service.name} in Tuticorin`,
+        : `${service.name} — KG Home Care`,
     description:
       "meta_description" in service && service.meta_description
         ? service.meta_description
@@ -97,7 +97,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     keywords:
       "keywords" in service && service.keywords
         ? service.keywords
-        : `${service.name.toLowerCase()}, ${service.name.toLowerCase()} tuticorin, washing machine ${slug.replace(/-/g, " ")}, kg home care`,
+        : `${service.name.toLowerCase()}, washing machine ${slug.replace(/-/g, " ")}, kg home care`,
     alternates: {
       canonical: `/services/${slug}`,
     },
@@ -121,7 +121,7 @@ export default async function ServiceDetailPage({ params }: Props) {
   const d =
     DETAIL[service.slug] ??
     ({
-      intro: "Doorstep service from trained washing machine specialists in Tuticorin.",
+      intro: "Service from trained washing machine specialists.",
       includes: [
         "Fast technician dispatch",
         "Transparent diagnosis",
@@ -159,14 +159,12 @@ export default async function ServiceDetailPage({ params }: Props) {
               {d.price}
             </div>
             <div className="mt-7 flex flex-wrap gap-3">
-              <a
-                href={waHref(bookingMessage({ service: service.name }))}
-                target="_blank"
-                rel="noreferrer"
+              <Link
+                href="/contact"
                 className="inline-flex h-12 items-center gap-2 rounded-xl bg-primary px-5 text-sm font-semibold text-primary-foreground shadow-lift"
               >
                 Book this service <ArrowRight className="h-4 w-4" />
-              </a>
+              </Link>
             </div>
           </div>
           <div>

@@ -3,9 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
-import { Menu, X, Phone, ChevronRight } from "lucide-react";
-import { WhatsAppIcon } from "./WhatsAppIcon";
-import { waHref, bookingMessage, telHref, PHONE_DISPLAY } from "@/lib/contact";
+import { Menu, X, ChevronRight } from "lucide-react";
 
 const NAV = [
   { href: "/",         label: "Home"     },
@@ -81,13 +79,6 @@ export function SiteHeader() {
 
           {/* Desktop CTAs */}
           <div className="hidden items-center gap-2.5 lg:flex">
-            <a
-              href={telHref()}
-              className="inline-flex items-center gap-2 rounded-xl border border-primary/30 bg-primary/5 px-4 py-2 text-[13px] font-bold text-primary transition-all hover:bg-primary/10"
-            >
-              <Phone className="h-3.5 w-3.5" />
-              Call Now
-            </a>
             <Link
               href="/contact"
               className="inline-flex items-center gap-2 rounded-xl bg-primary px-4 py-2 text-[13px] font-semibold text-white shadow-[0_4px_14px_-2px_rgba(0,87,255,0.35)] transition-all hover:-translate-y-px hover:bg-primary/90"
@@ -165,24 +156,15 @@ export function SiteHeader() {
           })}
         </nav>
 
-        {/* bottom CTAs */}
-        <div className="border-t border-border/50 px-4 py-5 space-y-3">
-          <a
-            href={telHref()}
-            className="flex w-full items-center justify-center gap-2.5 rounded-2xl border border-border bg-white py-3.5 text-sm font-bold text-foreground shadow-soft transition-colors hover:bg-secondary"
-          >
-            <Phone className="h-4 w-4 text-primary" />
-            {PHONE_DISPLAY}
-          </a>
-          <a
-            href={waHref(bookingMessage({}))}
-            target="_blank"
-            rel="noreferrer"
+        {/* bottom CTA */}
+        <div className="border-t border-border/50 px-4 py-5">
+          <Link
+            href="/contact"
+            onClick={() => setOpen(false)}
             className="flex w-full items-center justify-center gap-2.5 rounded-2xl bg-primary py-3.5 text-sm font-bold text-white shadow-[0_4px_16px_-4px_rgba(0,87,255,0.4)] transition-colors hover:bg-primary/90"
           >
-            <WhatsAppIcon className="h-4 w-4" />
-            Book Now on WhatsApp
-          </a>
+            Book Now
+          </Link>
         </div>
       </div>
     </>

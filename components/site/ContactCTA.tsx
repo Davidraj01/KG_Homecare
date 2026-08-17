@@ -1,6 +1,6 @@
-import { Phone, CalendarCheck, Clock, MapPin } from "lucide-react";
-import { telHref, waHref, bookingMessage, PHONE_DISPLAY, BUSINESS } from "@/lib/contact";
-import { WhatsAppIcon } from "./WhatsAppIcon";
+import { CalendarCheck, Clock, ShieldCheck } from "lucide-react";
+import Link from "next/link";
+import { BUSINESS } from "@/lib/contact";
 
 export function ContactCTA() {
   return (
@@ -49,63 +49,36 @@ export function ContactCTA() {
         {/* ── Left copy ── */}
         <div>
           <span className="inline-block rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-blue-300 backdrop-blur">
-            Available Mon – Sun · 8 AM – 9 PM
+            Available {BUSINESS.hours}
           </span>
 
           <h2 className="mt-5 text-3xl font-extrabold leading-[1.1] tracking-tight text-white md:text-4xl lg:text-[2.6rem]">
             Need urgent washing<br className="hidden sm:block" /> machine service?
           </h2>
           <p className="mt-4 max-w-lg text-base text-white/60">
-            Book in 60 seconds. Technician arrives today. Pay only after the job is done.
+            Submit your details below. Pay only after the job is done.
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3">
-            <a
-              href={telHref()}
+            <Link
+              href="/contact"
               className="inline-flex h-12 items-center gap-2.5 rounded-2xl bg-white px-6 text-sm font-bold text-slate-900 shadow-lg transition-all hover:scale-[1.02] hover:shadow-xl active:scale-95"
             >
-              <Phone className="h-4 w-4 text-primary" />
-              Call {PHONE_DISPLAY}
-            </a>
-            <a
-              href={waHref(bookingMessage({}))}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex h-12 items-center gap-2.5 rounded-2xl bg-[#25d366] px-6 text-sm font-bold text-white shadow-lg transition-all hover:scale-[1.02] hover:bg-[#22c55e] hover:shadow-xl active:scale-95"
-            >
-              <WhatsAppIcon className="h-4 w-4" />
-              WhatsApp Now
-            </a>
-            <a
-              href={waHref(bookingMessage({}))}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex h-12 items-center gap-2.5 rounded-2xl border border-white/15 bg-white/10 px-6 text-sm font-bold text-white backdrop-blur transition-all hover:bg-white/15 active:scale-95"
-            >
-              <CalendarCheck className="h-4 w-4" />
+              <CalendarCheck className="h-4 w-4 text-primary" />
               Book Service
-            </a>
+            </Link>
           </div>
         </div>
 
         {/* ── Right info card ── */}
         <div className="rounded-2xl border border-white/10 bg-white/8 p-7 backdrop-blur-md">
-          <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-blue-400">Visit Us</p>
-          <h3 className="mt-3 text-lg font-bold text-white">{BUSINESS.name}</h3>
-          <p className="text-sm text-white/60">Washing Machine Service Centre</p>
+          <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-blue-400">Why {BUSINESS.name}</p>
+          <h3 className="mt-3 text-lg font-bold text-white">{BUSINESS.tagline}</h3>
 
           <div className="mt-4 space-y-3">
-            <div className="flex items-start gap-3 text-sm text-white/70">
-              <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-blue-400" />
-              <span>
-                {BUSINESS.address.line1}<br />
-                {BUSINESS.address.line2}<br />
-                {BUSINESS.address.city}, {BUSINESS.address.state}
-              </span>
-            </div>
             <div className="flex items-center gap-3 text-sm text-white/70">
-              <Phone className="h-4 w-4 shrink-0 text-blue-400" />
-              <a href={telHref()} className="hover:text-white">{PHONE_DISPLAY}</a>
+              <ShieldCheck className="h-4 w-4 shrink-0 text-blue-400" />
+              <span>90-day service warranty</span>
             </div>
             <div className="flex items-center gap-3 text-sm text-white/70">
               <Clock className="h-4 w-4 shrink-0 text-blue-400" />
