@@ -1,106 +1,91 @@
 import Link from "next/link";
-import { notFound } from "next/navigation";
 import { format } from "date-fns";
-import { deleteLeadAction, updateLeadStatusAction } from "@/lib/actions/cms";
-import { getLeadById } from "@/lib/cms";
-import { Button } from "@/components/ui/button";
+import { Users, Wrench, FileText, ArrowRight } from "lucide-react";
+import { getLeads, getServices, getSeoPages } from "@/lib/cms";
 
-const statuses = ["New", "Contacted", "Converted", "Closed"] as const;
+export default async function DashboardOverviewPage() {
+  const [leads, services, seoPages] = await Promise.all([getLeads(), getServices(), getSeoPages()]);
 
-type LeadDetailPageProps = {
-  params: Promise<{ id: string }>;
-};
+  const newLeads = leads.filter((lead) => lead.status === "New").length;
+  const activeServices = services.filter((service) => service.status === "Active").length;
+  const publishedPages = seoPages.filter((page) => page.status === "Published").length;
+  const recentLeads = leads.slice(0, 5);
 
-export default async function LeadDetailPage({ params }: LeadDetailPageProps) {
-  const { id } = await params;
-  const lead = await getLeadById(id);
-
-  if (!lead) {
-    notFound();
-  }
+  const stats = [
+    { label: "Total leads", value: leads.length, sub: `${newLeads} new`, icon: Users, href: "/dashboard/leads" },
+    { label: "Services", value: services.length, sub: `${activeServices} active`, icon: Wrench, href: "/dashboard/services" },
+    { label: "SEO pages", value: seoPages.length, sub: `${publishedPages} published`, icon: FileText, href: "/dashboard/seo-pages" },
+  ];
 
   return (
     <div className="space-y-6">
       <section className="rounded-3xl border bg-white p-8 shadow-soft">
-        <Link href="/dashboard/leads" className="text-sm font-medium text-primary hover:underline">
-          ← Back to leads
-        </Link>
-        <h1 className="mt-4 text-3xl font-bold tracking-tight">{lead.name}</h1>
-        <p className="mt-2 text-muted-foreground">
-          Received {lead.created_at ? format(new Date(lead.created_at), "dd MMM yyyy, p") : "-"}
-        </p>
+        <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
+        <p className="mt-2 text-muted-foreground">Overview of leads, services, and SEO pages.</p>
       </section>
 
-      <section className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_320px]">
-        <div className="rounded-3xl border bg-white p-6 shadow-soft">
-          <div className="grid gap-6 md:grid-cols-2">
-            <div>
-              <p className="text-sm text-muted-foreground">Phone</p>
-              <p className="mt-1 font-semibold">{lead.phone}</p>
+      <section className="grid gap-6 md:grid-cols-3">
+        {stats.map(({ label, value, sub, icon: Icon, href }) => (
+          <Link
+            key={label}
+            href={href}
+            className="group rounded-3xl border bg-white p-6 shadow-soft transition-all hover:-translate-y-0.5 hover:shadow-lift"
+          >
+            <div className="flex items-center justify-between">
+              <span className="grid h-10 w-10 place-items-center rounded-xl bg-primary/10 text-primary">
+                <Icon className="h-5 w-5" />
+              </span>
+              <ArrowRight className="h-4 w-4 text-muted-foreground transition-transform group-hover:translate-x-1" />
             </div>
-            <div>
-              <p className="text-sm text-muted-foreground">Email</p>
-              <p className="mt-1 font-semibold">{lead.email || "-"}</p>
-            </div>
-            <div>
-              <p className="text-sm text-muted-foreground">Service</p>
-              <p className="mt-1 font-semibold">{lead.service || "-"}</p>
-            </div>
-            <div>
-              <p className="text-sm text-muted-foreground">Brand</p>
-              <p className="mt-1 font-semibold">{lead.brand || "-"}</p>
-            </div>
-            <div className="md:col-span-2">
-              <p className="text-sm text-muted-foreground">Location</p>
-              <p className="mt-1 font-semibold">{lead.location || "-"}</p>
-            </div>
-            <div className="md:col-span-2">
-              <p className="text-sm text-muted-foreground">Message</p>
-              <p className="mt-1 whitespace-pre-wrap rounded-2xl bg-secondary/40 p-4">{lead.message || "-"}</p>
-            </div>
-          </div>
+            <p className="mt-4 text-3xl font-bold tracking-tight">{value}</p>
+            <p className="text-sm text-muted-foreground">{label}</p>
+            <p className="mt-1 text-xs font-medium text-primary">{sub}</p>
+          </Link>
+        ))}
+      </section>
+
+      <section className="rounded-3xl border bg-white shadow-soft">
+        <div className="flex items-center justify-between border-b p-6">
+          <h2 className="text-lg font-semibold">Recent leads</h2>
+          <Link href="/dashboard/leads" className="text-sm font-medium text-primary hover:underline">
+            View all
+          </Link>
         </div>
-
-        <aside className="space-y-6">
-          <div className="rounded-3xl border bg-white p-6 shadow-soft">
-            <h2 className="text-lg font-semibold">Quick actions</h2>
-            <div className="mt-4 grid gap-3">
-              <a href={`tel:${lead.phone}`} className="rounded-xl border px-4 py-3 text-center text-sm font-medium hover:bg-secondary">
-                Call lead
-              </a>
-              <a
-                href={`https://wa.me/91${lead.phone.replace(/\D/g, "")}`}
-                target="_blank"
-                rel="noreferrer"
-                className="rounded-xl bg-primary px-4 py-3 text-center text-sm font-medium text-primary-foreground"
-              >
-                Open WhatsApp
-              </a>
-            </div>
+        {recentLeads.length === 0 ? (
+          <p className="p-6 text-sm text-muted-foreground">No leads yet.</p>
+        ) : (
+          <div className="overflow-x-auto">
+            <table className="min-w-full text-left text-sm">
+              <thead className="bg-secondary/60">
+                <tr>
+                  <th className="px-5 py-3 font-medium text-muted-foreground">Customer</th>
+                  <th className="px-5 py-3 font-medium text-muted-foreground">Service</th>
+                  <th className="px-5 py-3 font-medium text-muted-foreground">Status</th>
+                  <th className="px-5 py-3 font-medium text-muted-foreground">Received</th>
+                </tr>
+              </thead>
+              <tbody>
+                {recentLeads.map((lead) => (
+                  <tr key={lead.id} className="border-t">
+                    <td className="px-5 py-4">
+                      <Link href={`/dashboard/leads/${lead.id}`} className="font-semibold hover:text-primary hover:underline">
+                        {lead.name}
+                      </Link>
+                      <p className="text-xs text-muted-foreground">{lead.phone}</p>
+                    </td>
+                    <td className="px-5 py-4">{lead.service || "-"}</td>
+                    <td className="px-5 py-4">
+                      <span className="rounded-full bg-secondary px-2.5 py-1 text-xs font-semibold">{lead.status}</span>
+                    </td>
+                    <td className="px-5 py-4 text-muted-foreground">
+                      {lead.created_at ? format(new Date(lead.created_at), "dd MMM yyyy") : "-"}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
-
-          <div className="rounded-3xl border bg-white p-6 shadow-soft">
-            <h2 className="text-lg font-semibold">Update status</h2>
-            <div className="mt-4 grid gap-3">
-              {statuses.map((status) => (
-                <form key={status} action={updateLeadStatusAction.bind(null, lead.id)}>
-                  <input type="hidden" name="status" value={status} />
-                  <Button type="submit" variant={lead.status === status ? "default" : "outline"} className="w-full">
-                    Mark as {status}
-                  </Button>
-                </form>
-              ))}
-            </div>
-          </div>
-
-          <div className="rounded-3xl border bg-white p-6 shadow-soft">
-            <form action={deleteLeadAction.bind(null, lead.id)}>
-              <Button type="submit" variant="destructive" className="w-full">
-                Delete lead
-              </Button>
-            </form>
-          </div>
-        </aside>
+        )}
       </section>
     </div>
   );

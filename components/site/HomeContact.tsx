@@ -5,7 +5,7 @@ export function HomeContact() {
     <div className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr] lg:items-stretch">
 
       {/* ── LEFT: form ── */}
-      <div className="rounded-2xl border border-border bg-white p-6 shadow-soft md:p-8">
+      <div id="book" className="rounded-2xl border border-border bg-white p-6 shadow-soft md:p-8">
         <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-primary">Book a Service</p>
         <h3 className="mt-1.5 text-xl font-extrabold tracking-tight text-slate-900">Send us a message</h3>
         <p className="mt-1.5 text-sm text-slate-500">

@@ -474,7 +474,7 @@ export default async function SeoPage({ params }: SeoPageProps) {
       ) : null}
 
       {/* ═══ 8. LEAD CAPTURE FORM ═══ */}
-      <div className="relative overflow-hidden bg-slate-50">
+      <div id="book" className="relative overflow-hidden bg-slate-50">
         <div aria-hidden className="pointer-events-none absolute inset-0 opacity-[0.3]" style={{ backgroundImage: "radial-gradient(#94a3b8 1.2px, transparent 1.2px)", backgroundSize: "28px 28px" }} />
         <div className="pointer-events-none absolute -right-28 top-1/2 h-60 w-60 -translate-y-1/2 rounded-full bg-blue-100/40 blur-[80px]" />
         <Section className="relative">
