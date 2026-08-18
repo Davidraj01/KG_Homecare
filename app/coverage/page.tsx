@@ -1,27 +1,26 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { PageHeader } from "@/components/site/PageHeader";
 import { Section } from "@/components/site/Section";
-import { CalendarCheck, Clock, ShieldCheck, Wrench } from "lucide-react";
+import { MapPin } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Service Coverage — KG Home Care Washing Machine Service Centre",
+  title: "Service Areas — KG Home Care Washing Machine Service Centre",
   description:
-    "KG Home Care is expanding its washing machine service coverage. Submit your details and we'll confirm availability in your area.",
+    "KG Home Care washing machine service covers Tuticorin, Kovilpatti, Tiruchendur and surrounding villages across Tamil Nadu.",
   keywords:
-    "washing machine service coverage, service areas kg home care, doorstep washing machine service",
+    "washing machine service tuticorin, washing machine service kovilpatti, washing machine service tiruchendur, service areas kg home care, doorstep service tamil nadu",
   openGraph: {
     title: "Service Coverage — KG Home Care",
-    description: "Submit your details and we'll confirm service availability in your area.",
+    description: "We serve Tuticorin and 14+ surrounding towns and villages.",
     url: "/coverage",
   },
   alternates: { canonical: "/coverage" },
 };
 
-const POINTS = [
-  { icon: Clock, label: "Fast confirmation", desc: "We usually confirm availability within 30 minutes." },
-  { icon: Wrench, label: "Certified technicians", desc: "Trained, background-verified experts." },
-  { icon: ShieldCheck, label: "Service warranty", desc: "90-day warranty on every job." },
+const AREAS = [
+  "Tuticorin", "Pudukkottai", "Ettayapuram", "Kovilpatti", "Srivaikuntam",
+  "Tiruchendur", "Sattankulam", "Ottapidaram", "Vilathikulam", "Kayathar",
+  "Eral", "Authoor", "Karungulam", "Udangudi", "Nazareth", "Aruppukottai",
 ];
 
 export default function CoveragePage() {
@@ -29,8 +28,8 @@ export default function CoveragePage() {
     <>
       <PageHeader
         eyebrow="Service Coverage"
-        title="Doorstep washing machine service, expanding to more areas."
-        description="We're growing our service coverage. Submit your details and we'll confirm availability in your area."
+        title="Doorstep washing machine service across South Tamil Nadu."
+        description="Based in Tuticorin — we serve customers across the district and nearby villages."
       />
       <div className="relative overflow-hidden">
         {/* Dot grid pattern */}
@@ -45,30 +44,35 @@ export default function CoveragePage() {
         {/* Gradient orbs */}
         <div className="pointer-events-none absolute -right-32 top-1/4 h-80 w-80 rounded-full bg-blue-100/40 blur-[100px]" />
         <div className="pointer-events-none absolute -left-20 bottom-0 h-60 w-60 rounded-full bg-indigo-100/30 blur-[80px]" />
+        {/* Floating shapes */}
+        <div className="pointer-events-none absolute right-12 top-12 h-28 w-28 rounded-full border-[3px] border-primary/10" />
+        <div className="pointer-events-none absolute right-24 top-24 h-12 w-12 rounded-full border-[3px] border-blue-300/25" />
+        <div className="pointer-events-none absolute left-10 bottom-16 h-20 w-20 rotate-45 rounded-md border-[3px] border-indigo-300/20" />
+        <div className="pointer-events-none absolute left-1/2 top-8 h-16 w-16 rounded-full border-[3px] border-violet-200/25" />
         <Section className="relative">
-          <div className="mx-auto max-w-2xl text-center">
-            <h2 className="text-2xl font-bold tracking-tight">Not sure if we cover your area yet?</h2>
-            <p className="mt-2 text-muted-foreground">
-              Send us your details and our team will confirm availability and get back to you shortly.
-            </p>
-            <div className="mt-8 grid gap-4 sm:grid-cols-3">
-              {POINTS.map(({ icon: Icon, label, desc }) => (
-                <div key={label} className="rounded-2xl border border-slate-100 bg-white p-5 text-left shadow-soft">
-                  <span className="grid h-10 w-10 place-items-center rounded-xl bg-primary/10 text-primary">
-                    <Icon className="h-5 w-5" />
-                  </span>
-                  <p className="mt-3 text-sm font-semibold text-foreground">{label}</p>
-                  <p className="mt-0.5 text-xs text-muted-foreground">{desc}</p>
-                </div>
-              ))}
+          <div className="grid gap-8 lg:grid-cols-[1fr_1.2fr]">
+            <div>
+              <h2 className="text-2xl font-bold tracking-tight">Areas we cover</h2>
+              <p className="mt-2 text-muted-foreground">
+                Don&apos;t see your area? Send us your pincode on WhatsApp — we cover most of the district.
+              </p>
+              <ul className="mt-6 grid grid-cols-2 gap-3">
+                {AREAS.map((a) => (
+                  <li key={a} className="flex items-center gap-2 rounded-xl border border-slate-100 bg-white px-3 py-2.5 text-sm font-medium text-foreground shadow-soft transition-all hover:-translate-y-0.5 hover:shadow-lift">
+                    <MapPin className="h-4 w-4 text-primary" /> {a}
+                  </li>
+                ))}
+              </ul>
             </div>
-            <Link
-              href="/contact"
-              className="mt-8 inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-3 text-sm font-bold text-white shadow-lift transition-all hover:-translate-y-0.5"
-            >
-              <CalendarCheck className="h-4 w-4" />
-              Check Availability
-            </Link>
+            <div className="overflow-hidden rounded-3xl border border-border bg-muted shadow-lift">
+              <iframe
+                title="KG Home Care location"
+                src="https://www.google.com/maps?q=5A%2F394+Caldwell+Colony+3rd+Street+Tuticorin+Tamil+Nadu&output=embed"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="h-full min-h-[420px] w-full"
+              />
+            </div>
           </div>
         </Section>
       </div>

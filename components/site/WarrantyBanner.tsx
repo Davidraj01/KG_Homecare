@@ -1,6 +1,6 @@
 import { ShieldCheck, Wrench, BadgeCheck, Stars, ArrowRight } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
+import { waHref, bookingMessage } from "@/lib/contact";
 
 const POINTS = [
   { icon: ShieldCheck, label: "Warranty Support",    desc: "Written warranty on every job." },
@@ -53,13 +53,15 @@ export function WarrantyBanner() {
             Pay only when you&apos;re 100% satisfied. We stand behind every service with genuine spare parts and certified technician workmanship.
           </p>
 
-          <Link
-            href="/contact"
+          <a
+            href={waHref(bookingMessage({}))}
+            target="_blank"
+            rel="noreferrer"
             className="group mt-8 inline-flex items-center gap-2 rounded-2xl bg-primary px-6 py-3.5 text-sm font-bold text-white shadow-[0_8px_20px_-6px_rgba(0,87,255,0.5)] transition-all hover:bg-primary/90 hover:shadow-[0_12px_28px_-6px_rgba(0,87,255,0.6)] active:scale-[0.98]"
           >
             Book with Warranty
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-          </Link>
+          </a>
         </div>
 
         {/* ── Right: feature cards ── */}

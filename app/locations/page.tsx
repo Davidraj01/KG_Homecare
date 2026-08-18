@@ -8,9 +8,9 @@ import { ScrollReveal } from "@/components/site/ScrollReveal";
 export const metadata: Metadata = {
   title: "Locations — KG Home Care | Washing Machine Service Centre",
   description:
-    "Find KG Home Care washing machine service in your area. We're expanding to more locations regularly.",
+    "Find KG Home Care washing machine service in your area. We serve Tuticorin, Thoothukudi, Chennai and many more locations across Tamil Nadu.",
   keywords:
-    "washing machine service locations, kg home care areas, washing machine repair near me, doorstep service",
+    "washing machine service locations, kg home care areas, washing machine repair near me, doorstep service tamil nadu",
   openGraph: {
     title: "Our Service Locations — KG Home Care",
     description:

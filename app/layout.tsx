@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { AppShell } from "@/components/site/AppShell";
 import { BUSINESS } from "@/lib/contact";
+import { getPublishedSeoPages } from "@/lib/cms";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -10,18 +11,20 @@ export const metadata: Metadata = {
     template: `%s — ${BUSINESS.name}`,
   },
   description:
-    "KG Home Care provides washing machine repair, installation, and maintenance — certified technicians, genuine parts.",
+    "KG Home Care provides doorstep washing machine repair, installation, and maintenance in Tuticorin — certified technicians, genuine parts.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const seoPages = await getPublishedSeoPages();
+
   return (
     <html lang="en">
       <body className="antialiased">
-        <AppShell>{children}</AppShell>
+        <AppShell seoPages={seoPages}>{children}</AppShell>
       </body>
     </html>
   );

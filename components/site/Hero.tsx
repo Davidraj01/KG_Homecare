@@ -34,14 +34,15 @@ export function Hero() {
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75"></span>
             <span className="relative inline-flex h-2 w-2 rounded-full bg-accent"></span>
           </span>
-          Trusted by thousands of happy customers
+          Trusted by 1,000+ homes in Tuticorin
         </span>
 
         <h1 className="mt-6 text-4xl font-extrabold leading-[1.1] tracking-tight text-white sm:text-5xl lg:text-[3.5rem]">
           Washing Machine{" "}
           <span className="bg-gradient-to-r from-primary to-blue-400 bg-clip-text text-transparent drop-shadow-sm">
             Service Centre
-          </span>
+          </span>{" "}
+          in Tuticorin
         </h1>
 
         <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-white/75 md:text-lg">

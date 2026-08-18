@@ -19,11 +19,11 @@ export const revalidate = 60;
 export const metadata: Metadata = {
   title: `${BUSINESS.name} — ${BUSINESS.tagline}`,
   description:
-    "Professional washing machine repair, installation, drum cleaning and maintenance. Certified technicians, genuine parts, 90-day warranty.",
+    "Professional doorstep washing machine repair, installation, drum cleaning and maintenance in Tuticorin. Certified technicians, genuine parts, 90-day warranty.",
   alternates: { canonical: "/" },
   openGraph: {
     title: `${BUSINESS.name} — ${BUSINESS.tagline}`,
-    description: "Professional washing machine service. Same-day service, genuine parts, 90-day warranty.",
+    description: "Professional doorstep washing machine service in Tuticorin. Same-day service, genuine parts, 90-day warranty.",
     url: "/",
   },
 };
@@ -119,7 +119,7 @@ export default async function HomePage() {
         />
         <Section
           eyebrow="Customer Reviews"
-          title="Loved by happy customers"
+          title="Loved by homes across Tuticorin"
           align="center"
           className="relative"
         >

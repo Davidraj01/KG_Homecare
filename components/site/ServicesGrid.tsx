@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { SERVICES } from "@/lib/contact";
+import { SERVICES, bookingMessage, waHref } from "@/lib/contact";
 import { ArrowUpRight } from "lucide-react";
 import type { ServiceRecord } from "@/lib/cms";
 
@@ -92,12 +92,14 @@ export function ServicesGrid({
               >
                 Details
               </Link>
-              <Link
-                href="/contact"
+              <a
+                href={waHref(bookingMessage({ service: s.name }))}
+                target="_blank"
+                rel="noreferrer"
                 className="flex items-center justify-center gap-1.5 rounded-xl bg-primary py-2.5 text-sm font-semibold text-white transition-colors hover:bg-primary/90"
               >
                 Book <ArrowUpRight className="h-3.5 w-3.5" />
-              </Link>
+              </a>
             </div>
           </div>
         </article>

@@ -9,14 +9,14 @@ import { getPublicServices } from "@/lib/cms";
 export const revalidate = 60;
 
 export const metadata: Metadata = {
-  title: "Washing Machine Services — KG Home Care",
+  title: "Washing Machine Services — KG Home Care | Tuticorin",
   description:
-    "Repair, installation, drum cleaning, PCB and motor service for all washing machine brands. Certified technicians, genuine parts.",
-  keywords: "washing machine service, washing machine repair, installation, drum cleaning, pcb repair, motor repair",
+    "Repair, installation, drum cleaning, PCB and motor service for all washing machine brands. Certified technicians, genuine parts, doorstep service in Tuticorin.",
+  keywords: "washing machine service, washing machine repair tuticorin, installation, drum cleaning, pcb repair, motor repair",
   alternates: { canonical: "/services" },
   openGraph: {
     title: "Washing Machine Services — KG Home Care",
-    description: "Repair, installation, drum cleaning, PCB and motor service — all major brands.",
+    description: "Repair, installation, drum cleaning, PCB and motor service — all major brands, doorstep in Tuticorin.",
     url: "/services",
   },
 };
@@ -39,7 +39,7 @@ export default async function ServicesPage() {
             Washing Machine Services
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-base text-muted-foreground md:text-lg">
-            Repair, installation, and maintenance for all major brands — certified technicians, genuine parts.
+            Repair, installation, and maintenance for all major brands — certified technicians, genuine parts, doorstep in Tuticorin.
           </p>
         </div>
       </section>
