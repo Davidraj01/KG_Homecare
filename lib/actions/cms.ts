@@ -8,7 +8,7 @@ import {
   parseFaqText,
   parseTestimonialsText,
   slugify,
-} from "@/lib/cms.types";
+} from "@/lib/cms";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 import { hasSupabaseEnv } from "@/lib/supabase/env";
 

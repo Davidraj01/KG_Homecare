@@ -101,6 +101,8 @@ const AREAS_SERVED = [
   "Kayathar",
 ];
 
+
+
 export default function ThoothukudiPage() {
   return (
     <>
@@ -320,8 +322,7 @@ export default function ThoothukudiPage() {
               "linear-gradient(to right, #cbd5e1 1px, transparent 1px), linear-gradient(to bottom, #cbd5e1 1px, transparent 1px)",
             backgroundSize: "50px 50px",
           }}
-        >
-        </div>
+        />
         <Section
           eyebrow="Why KG Home Care"
           title="Why Thoothukudi Trusts Us"

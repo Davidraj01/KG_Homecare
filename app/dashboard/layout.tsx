@@ -3,7 +3,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { getAdminSession } from "@/lib/auth";
 import { signOutAdmin } from "@/lib/actions/cms";
-import { Users, FileText, LogOut, Wrench } from "lucide-react";
+import { Users, FileText, LogOut } from "lucide-react";
 import "ckeditor5/ckeditor5.css";
 import "./ckeditor.css";
 
@@ -13,7 +13,6 @@ export const metadata: Metadata = {
 
 const NAV = [
   { href: "/dashboard/leads",     label: "Contact Leads", icon: Users           },
-  { href: "/dashboard/services",  label: "Services",      icon: Wrench          },
   { href: "/dashboard/seo-pages", label: "SEO Pages",     icon: FileText        },
 ];
 

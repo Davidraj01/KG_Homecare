@@ -9,11 +9,11 @@ export function FloatingActions() {
   const pathname = usePathname();
 
   // Hide on standard non-SEO pages
-  const isExcluded =
-    pathname === "/" ||
-    pathname === "/about" ||
-    pathname === "/contact" ||
-    pathname.startsWith("/dashboard") ||
+  const isExcluded = 
+    pathname === "/" || 
+    pathname === "/about" || 
+    pathname === "/contact" || 
+    pathname.startsWith("/dashboard") || 
     pathname.startsWith("/login");
 
   if (isExcluded) return null;
@@ -30,7 +30,7 @@ export function FloatingActions() {
         <WhatsAppIcon className="h-5 w-5 text-white" />
         <span className="hidden sm:inline">WhatsApp</span>
       </a>
-
+      
       <a
         href={telHref()}
         aria-label="Call us"
