@@ -8,7 +8,6 @@ import { TrustStats } from "@/components/site/TrustStats";
 import { WhyChooseUs } from "@/components/site/WhyChooseUs";
 import { HowItWorks } from "@/components/site/HowItWorks";
 import { CommonProblems } from "@/components/site/CommonProblems";
-import { WarrantyBanner } from "@/components/site/WarrantyBanner";
 import { Reviews } from "@/components/site/Reviews";
 import { FaqAccordion } from "@/components/site/FaqAccordion";
 import { HomeContact } from "@/components/site/HomeContact";
@@ -104,12 +103,6 @@ export default async function HomePage() {
           </ScrollReveal>
         </Section>
       </div>
-
-      <Section className="bg-white">
-        <ScrollReveal>
-          <WarrantyBanner />
-        </ScrollReveal>
-      </Section>
 
       <div className="relative overflow-hidden bg-slate-50">
         <div

@@ -1,11 +1,12 @@
 import Link from "next/link";
-import { BUSINESS } from "@/lib/contact";
-import { Clock } from "lucide-react";
+import { BUSINESS, PHONE_DISPLAY, waHref } from "@/lib/contact";
+import { Clock, MapPin } from "lucide-react";
+import { WhatsAppIcon } from "./WhatsAppIcon";
 
 export function SiteFooter() {
   return (
     <footer className="border-t border-white/5 bg-[#07090f] text-white">
-      <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:px-6 md:grid-cols-2 lg:grid-cols-3 lg:px-8">
+      <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:px-6 md:grid-cols-2 lg:grid-cols-4 lg:px-8">
 
         {/* ── Brand ── */}
         <div>
@@ -14,9 +15,34 @@ export function SiteFooter() {
           <p className="mt-3 max-w-xs text-sm leading-relaxed text-white/50">
             Trusted washing machine service, installation and maintenance — certified technicians, genuine parts.
           </p>
-          <p className="mt-5 flex items-center gap-2.5 text-sm text-white/60">
-            <Clock className="h-3.5 w-3.5 text-primary" /> {BUSINESS.hours}
-          </p>
+        </div>
+
+        {/* ── Contact ── */}
+        <div>
+          <h3 className="text-xs font-bold uppercase tracking-[0.18em] text-white/40">Contact</h3>
+          <ul className="mt-4 space-y-2.5 text-sm">
+            <li>
+              <a
+                href={waHref("Hi KG Home Care, I'd like to book a washing machine service.")}
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center gap-2.5 text-white/60 transition-colors hover:text-white"
+              >
+                <WhatsAppIcon className="h-3.5 w-3.5 shrink-0 text-[#25d366]" /> {PHONE_DISPLAY}
+              </a>
+            </li>
+            <li className="flex items-start gap-2.5 text-white/60">
+              <MapPin className="mt-0.5 h-3.5 w-3.5 shrink-0 text-primary" />
+              <span>
+                {BUSINESS.address.line1}<br />
+                {BUSINESS.address.line2}<br />
+                {BUSINESS.address.city}
+              </span>
+            </li>
+            <li className="flex items-center gap-2.5 text-white/60">
+              <Clock className="h-3.5 w-3.5 shrink-0 text-primary" /> {BUSINESS.hours}
+            </li>
+          </ul>
         </div>
 
         {/* ── Quick Links ── */}
