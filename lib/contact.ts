@@ -1,11 +1,26 @@
 // Single source of truth for KG Home Care business info.
-// Contact happens only through the booking form — no phone/WhatsApp/address is published.
 
 export const BUSINESS = {
   name: "KG Home Care",
   tagline: "Washing Machine Service & Repair",
+  address: {
+    line1: "7/1, Kovil Street,",
+    line2: "Pudukkottai – 628103",
+    city: "Tuticorin",
+  },
   hours: "Mon – Sun · 8:00 AM – 9:00 PM",
 };
+
+// WhatsApp-only contact number — used on the contact page. Clicking it opens
+// WhatsApp, not the phone dialer.
+export const WHATSAPP_RAW = "918122931402";
+export const PHONE_DISPLAY = "+91 81229 31402";
+
+export function waHref(message?: string): string {
+  const base = `https://wa.me/${WHATSAPP_RAW}`;
+  if (!message) return base;
+  return `${base}?text=${encodeURIComponent(message)}`;
+}
 
 export const BRANDS = [] as const;
 

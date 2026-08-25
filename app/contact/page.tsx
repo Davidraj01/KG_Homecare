@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import { Clock, ShieldCheck, Wrench } from "lucide-react";
-import { BUSINESS } from "@/lib/contact";
+import { Clock, ShieldCheck, Wrench, MapPin } from "lucide-react";
+import { BUSINESS, PHONE_DISPLAY, waHref } from "@/lib/contact";
 import { LeadCaptureForm } from "@/components/site/LeadCaptureForm";
+import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
 
 export const metadata: Metadata = {
   title: {
@@ -121,7 +122,7 @@ export default function ContactPage() {
         <div className="pointer-events-none absolute -right-40 top-1/3 h-96 w-96 rounded-full bg-violet-100/30 blur-[120px]" />
         <div className="pointer-events-none absolute -left-32 bottom-0 h-72 w-72 rounded-full bg-blue-100/30 blur-[100px]" />
         <div aria-hidden className="pointer-events-none absolute inset-0 opacity-[0.25]" style={{ backgroundImage: "linear-gradient(to right, #e2e8f0 1px, transparent 1px), linear-gradient(to bottom, #e2e8f0 1px, transparent 1px)", backgroundSize: "48px 48px" }} />
-        <div className="relative mx-auto max-w-2xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
+        <div className="relative mx-auto grid max-w-5xl gap-8 px-4 py-16 sm:px-6 lg:grid-cols-[1.2fr_0.8fr] lg:px-8 lg:py-20">
           <div id="book" className="rounded-3xl border border-slate-200 bg-white p-8 shadow-soft md:p-10">
             <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-primary">Book a Service</p>
             <h2 className="mt-2 text-2xl font-extrabold tracking-tight text-slate-900 md:text-3xl">
@@ -132,6 +133,39 @@ export default function ContactPage() {
             </p>
             <div className="mt-8">
               <LeadCaptureForm />
+            </div>
+          </div>
+
+          {/* Contact details */}
+          <div className="flex flex-col gap-6">
+            <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-soft">
+              <h3 className="text-lg font-bold text-slate-900">{BUSINESS.name}</h3>
+              <p className="text-sm text-slate-500">Washing Machine Service Centre</p>
+              <ul className="mt-4 space-y-3 text-sm text-slate-600">
+                <li className="flex items-start gap-3">
+                  <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                  <span>
+                    {BUSINESS.address.line1}<br />
+                    {BUSINESS.address.line2}<br />
+                    {BUSINESS.address.city}
+                  </span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <WhatsAppIcon className="h-4 w-4 shrink-0 text-[#25d366]" />
+                  <a
+                    href={waHref("Hi KG Home Care, I'd like to book a washing machine service.")}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="hover:text-primary"
+                  >
+                    {PHONE_DISPLAY}
+                  </a>
+                </li>
+                <li className="flex items-center gap-3">
+                  <Clock className="h-4 w-4 shrink-0 text-primary" />
+                  <span>{BUSINESS.hours}</span>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
