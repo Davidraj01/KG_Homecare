@@ -58,7 +58,7 @@ const faqSchema = {
 const TRUST_POINTS = [
   { icon: Clock, label: "Fast response", desc: "We usually reply within 30 minutes." },
   { icon: Wrench, label: "Certified technicians", desc: "Trained, background-verified experts." },
-  { icon: ShieldCheck, label: "Service warranty", desc: "90-day warranty on every job." },
+  { icon: ShieldCheck, label: "Service warranty", desc: "1-year warranty on every job." },
 ];
 
 export default function ContactPage() {

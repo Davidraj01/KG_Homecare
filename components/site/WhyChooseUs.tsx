@@ -10,7 +10,7 @@ const FEATURES = [
   { icon: Wrench,       label: "Doorstep Service",       desc: "We come to you — no transport hassle."   },
   { icon: Clock,        label: "Same Day Support",       desc: "Most services done within hours."          },
   { icon: IndianRupee,  label: "Affordable Pricing",     desc: "Transparent rates, no hidden fees."       },
-  { icon: ShieldCheck,  label: "Service Warranty",       desc: "90-day warranty on every service."         },
+  { icon: ShieldCheck,  label: "Service Warranty",       desc: "1-year warranty on every service."         },
   { icon: Receipt,      label: "Transparent Charges",    desc: "Quote before any work begins."            },
   { icon: Zap,          label: "Quick Response",         desc: "Technician dispatched in 15 minutes."     },
 ];
@@ -18,7 +18,7 @@ const FEATURES = [
 const STATS = [
   { value: "5,000+", label: "Homes"    },
   { value: "8+",     label: "Yrs Exp"  },
-  { value: "90-day", label: "Warranty" },
+  { value: "1-Yr", label: "Warranty" },
   { value: "4.9★",   label: "Rating"   },
 ];
 

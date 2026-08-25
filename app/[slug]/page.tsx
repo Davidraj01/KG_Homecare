@@ -231,7 +231,7 @@ export default async function SeoPage({ params }: SeoPageProps) {
                 {[
                   { icon: Clock, label: "Same Day Service" },
                   { icon: Award, label: "Genuine Parts" },
-                  { icon: ShieldCheck, label: "90-Day Warranty" },
+                  { icon: ShieldCheck, label: "1-Year Warranty" },
                   { icon: Wrench, label: "Expert Technicians" },
                 ].map((b) => (
                   <li

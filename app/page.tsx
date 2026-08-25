@@ -19,11 +19,11 @@ export const revalidate = 60;
 export const metadata: Metadata = {
   title: `${BUSINESS.name} — ${BUSINESS.tagline}`,
   description:
-    "Professional washing machine repair, installation, drum cleaning and maintenance. Certified technicians, genuine parts, 90-day warranty.",
+    "Professional washing machine repair, installation, drum cleaning and maintenance. Certified technicians, genuine parts, 1-year warranty.",
   alternates: { canonical: "/" },
   openGraph: {
     title: `${BUSINESS.name} — ${BUSINESS.tagline}`,
-    description: "Professional washing machine service. Same-day service, genuine parts, 90-day warranty.",
+    description: "Professional washing machine service. Same-day service, genuine parts, 1-year warranty.",
     url: "/",
   },
 };

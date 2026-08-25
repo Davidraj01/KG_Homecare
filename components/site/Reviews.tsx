@@ -33,7 +33,7 @@ const REVIEWS = [
     name: "Vignesh Kumar",
     date: "Mar 2026",
     rating: 5,
-    text: "Same-day service, genuine spare part, 90-day warranty. KG Home Care is now our go-to for anything washing machine.",
+    text: "Same-day service, genuine spare part, 1-year warranty. KG Home Care is now our go-to for anything washing machine.",
     color: "bg-rose-600",
   },
   {

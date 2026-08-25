@@ -19,13 +19,13 @@ export const metadata: Metadata = {
   title:
     "Washing Machine Service | Same Day Doorstep Service — KG Home Care",
   description:
-    "Expert washing machine service, installation, drum cleaning & maintenance. Same day doorstep service for all models. Genuine parts, 90-day warranty.",
+    "Expert washing machine service, installation, drum cleaning & maintenance. Same day doorstep service for all models. Genuine parts, 1-year warranty.",
   keywords:
     "washing machine service, washing machine repair, washing machine installation, drum cleaning, pcb service, motor service",
   openGraph: {
     title: "Washing Machine Service — KG Home Care",
     description:
-      "Doorstep washing machine service, installation & maintenance. Same day service, genuine parts, 90-day warranty.",
+      "Doorstep washing machine service, installation & maintenance. Same day service, genuine parts, 1-year warranty.",
     url: "/thoothukudi",
   },
   alternates: { canonical: "/thoothukudi" },
@@ -122,14 +122,14 @@ export default function ThoothukudiPage() {
               <p className="mt-6 max-w-xl text-base leading-relaxed text-white/70 md:text-lg">
                 Professional doorstep washing machine service, installation &
                 deep cleaning. Same day visit by certified
-                technicians with genuine spare parts and 90-day service warranty.
+                technicians with genuine spare parts and 1-year service warranty.
               </p>
 
               <ul className="mt-8 flex flex-wrap gap-x-3 gap-y-3">
                 {[
                   { icon: Clock, label: "Same Day Service" },
                   { icon: Award, label: "Genuine Parts" },
-                  { icon: ShieldCheck, label: "90-Day Warranty" },
+                  { icon: ShieldCheck, label: "1-Year Warranty" },
                   { icon: Wrench, label: "Expert Technicians" },
                 ].map((b) => (
                   <li
@@ -273,7 +273,7 @@ export default function ThoothukudiPage() {
                 },
                 {
                   icon: ShieldCheck,
-                  title: "90-Day Warranty",
+                  title: "1-Year Warranty",
                   text: "Written warranty on every repair. Same issue? Free re-visit.",
                 },
                 {

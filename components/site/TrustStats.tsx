@@ -2,7 +2,7 @@ const STATS = [
   { value: "5,000+",  label: "Machines Serviced"  },
   { value: "12,000+", label: "Happy Customers"     },
   { value: "4.9★",    label: "Google Rating"       },
-  { value: "90-day",  label: "Service Warranty"    },
+  { value: "1-year",  label: "Service Warranty"    },
 ];
 
 // Triple so the marquee loops with zero visible gap

@@ -78,7 +78,7 @@ export function ContactCTA() {
           <div className="mt-4 space-y-3">
             <div className="flex items-center gap-3 text-sm text-white/70">
               <ShieldCheck className="h-4 w-4 shrink-0 text-blue-400" />
-              <span>90-day service warranty</span>
+              <span>1-year service warranty</span>
             </div>
             <div className="flex items-center gap-3 text-sm text-white/70">
               <Clock className="h-4 w-4 shrink-0 text-blue-400" />

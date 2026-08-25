@@ -372,7 +372,7 @@ export function SeoPageForm({ action, initialData, submitLabel }: SeoPageFormPro
                   className={textareaClass + " font-mono text-xs"}
                   defaultValue={initialData?.other_tags ?? ""}
                   rows={10}
-                  placeholder={`<title>Washing Machine Service | KG Home Care</title>\n<meta name="description" content="Professional washing machine service. Same day doorstep service, genuine parts, 90-day warranty." />\n<meta name="keywords" content="washing machine service, washing machine repair" />\n<link rel="canonical" href="https://kghomecare.in/washing-machine-service" />\n<meta property="og:title" content="Washing Machine Service" />\n<meta property="og:description" content="Professional washing machine service." />`}
+                  placeholder={`<title>Washing Machine Service | KG Home Care</title>\n<meta name="description" content="Professional washing machine service. Same day doorstep service, genuine parts, 1-year warranty." />\n<meta name="keywords" content="washing machine service, washing machine repair" />\n<link rel="canonical" href="https://kghomecare.in/washing-machine-service" />\n<meta property="og:title" content="Washing Machine Service" />\n<meta property="og:description" content="Professional washing machine service." />`}
                 />
               </FormField>
             </div>

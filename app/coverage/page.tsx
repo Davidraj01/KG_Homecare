@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 const POINTS = [
   { icon: Clock, label: "Fast confirmation", desc: "We usually confirm availability within 30 minutes." },
   { icon: Wrench, label: "Certified technicians", desc: "Trained, background-verified experts." },
-  { icon: ShieldCheck, label: "Service warranty", desc: "90-day warranty on every job." },
+  { icon: ShieldCheck, label: "Service warranty", desc: "1-year warranty on every job." },
 ];
 
 export default function CoveragePage() {
