@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   description:
     "Expert washing machine service, installation, drum cleaning & maintenance. Same day doorstep service for all models. Genuine parts, 90-day warranty.",
   keywords:
-    "washing machine service, washing machine service centre, washing machine installation, drum cleaning, pcb service, motor service",
+    "washing machine service, washing machine repair, washing machine installation, drum cleaning, pcb service, motor service",
   openGraph: {
     title: "Washing Machine Service — KG Home Care",
     description:
@@ -116,7 +116,7 @@ export default function ThoothukudiPage() {
               </span>
 
               <h1 className="mt-6 text-4xl font-extrabold leading-[1.1] tracking-tight text-white sm:text-5xl lg:text-[3.5rem]">
-                Washing Machine Service Centre
+                Washing Machine Repair & Service
               </h1>
 
               <p className="mt-6 max-w-xl text-base leading-relaxed text-white/70 md:text-lg">

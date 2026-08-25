@@ -191,10 +191,17 @@ export async function createServiceAction(
   }
 
   const imageFile = formData.get("image") as File | null;
-  const imageUrl =
-    imageFile && imageFile.size > 0
-      ? await uploadImage("services", slug, imageFile)
-      : null;
+  let imageUrl: string | null = null;
+  if (imageFile && imageFile.size > 0) {
+    try {
+      imageUrl = await uploadImage("services", slug, imageFile);
+    } catch (err) {
+      return {
+        success: false,
+        message: err instanceof Error ? err.message : "Failed to upload image.",
+      };
+    }
+  }
 
   const supabase = await createServerSupabaseClient();
   const { error } = await supabase.from("services").insert({
@@ -249,8 +256,15 @@ export async function updateServiceAction(
   }
 
   if (imageFile && imageFile.size > 0) {
-    if (existingImageUrl) await deleteImage(existingImageUrl);
-    imageUrl = await uploadImage("services", slug, imageFile);
+    try {
+      if (existingImageUrl) await deleteImage(existingImageUrl);
+      imageUrl = await uploadImage("services", slug, imageFile);
+    } catch (err) {
+      return {
+        success: false,
+        message: err instanceof Error ? err.message : "Failed to upload image.",
+      };
+    }
   }
 
   const supabase = await createServerSupabaseClient();
@@ -344,19 +358,26 @@ export async function createSeoPageAction(
     };
   }
 
-  // Hero image upload
-  const heroImageFile = formData.get("hero_image") as File | null;
-  const imageUrl =
-    heroImageFile && heroImageFile.size > 0
-      ? await uploadImage("seo-pages", slug, heroImageFile)
-      : null;
+  let imageUrl: string | null = null;
+  let section2ImageUrl: string | null = null;
+  try {
+    // Hero image upload
+    const heroImageFile = formData.get("hero_image") as File | null;
+    if (heroImageFile && heroImageFile.size > 0) {
+      imageUrl = await uploadImage("seo-pages", slug, heroImageFile);
+    }
 
-  // Section 2 image upload
-  const section2ImageFile = formData.get("section2_image") as File | null;
-  const section2ImageUrl =
-    section2ImageFile && section2ImageFile.size > 0
-      ? await uploadImage("seo-pages", `${slug}-s2`, section2ImageFile)
-      : null;
+    // Section 2 image upload
+    const section2ImageFile = formData.get("section2_image") as File | null;
+    if (section2ImageFile && section2ImageFile.size > 0) {
+      section2ImageUrl = await uploadImage("seo-pages", `${slug}-s2`, section2ImageFile);
+    }
+  } catch (err) {
+    return {
+      success: false,
+      message: err instanceof Error ? err.message : "Failed to upload image.",
+    };
+  }
 
   const supabase = await createServerSupabaseClient();
   const { error } = await supabase.from("seo_pages").insert({
@@ -423,16 +444,6 @@ export async function updateSeoPageAction(
 
   let imageUrl = existingImageUrl;
 
-  if (shouldRemoveHeroImage && existingImageUrl) {
-    await deleteImage(existingImageUrl);
-    imageUrl = null;
-  }
-
-  if (heroImageFile && heroImageFile.size > 0) {
-    if (existingImageUrl) await deleteImage(existingImageUrl);
-    imageUrl = await uploadImage("seo-pages", slug, heroImageFile);
-  }
-
   // Section 2 image handling
   const existingSection2ImageUrl = readNullableString(formData, "existing_section2_image_url");
   const shouldRemoveSection2Image = readString(formData, "remove_section2_image") === "true";
@@ -440,14 +451,31 @@ export async function updateSeoPageAction(
 
   let section2ImageUrl = existingSection2ImageUrl;
 
-  if (shouldRemoveSection2Image && existingSection2ImageUrl) {
-    await deleteImage(existingSection2ImageUrl);
-    section2ImageUrl = null;
-  }
+  try {
+    if (shouldRemoveHeroImage && existingImageUrl) {
+      await deleteImage(existingImageUrl);
+      imageUrl = null;
+    }
 
-  if (section2ImageFile && section2ImageFile.size > 0) {
-    if (existingSection2ImageUrl) await deleteImage(existingSection2ImageUrl);
-    section2ImageUrl = await uploadImage("seo-pages", `${slug}-s2`, section2ImageFile);
+    if (heroImageFile && heroImageFile.size > 0) {
+      if (existingImageUrl) await deleteImage(existingImageUrl);
+      imageUrl = await uploadImage("seo-pages", slug, heroImageFile);
+    }
+
+    if (shouldRemoveSection2Image && existingSection2ImageUrl) {
+      await deleteImage(existingSection2ImageUrl);
+      section2ImageUrl = null;
+    }
+
+    if (section2ImageFile && section2ImageFile.size > 0) {
+      if (existingSection2ImageUrl) await deleteImage(existingSection2ImageUrl);
+      section2ImageUrl = await uploadImage("seo-pages", `${slug}-s2`, section2ImageFile);
+    }
+  } catch (err) {
+    return {
+      success: false,
+      message: err instanceof Error ? err.message : "Failed to upload image.",
+    };
   }
 
   const supabase = await createServerSupabaseClient();

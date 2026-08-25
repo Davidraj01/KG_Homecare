@@ -6,7 +6,7 @@ import { Section } from "@/components/site/Section";
 import { ScrollReveal } from "@/components/site/ScrollReveal";
 
 export const metadata: Metadata = {
-  title: "Locations — KG Home Care | Washing Machine Service Centre",
+  title: "Locations — KG Home Care",
   description:
     "Find KG Home Care washing machine service in your area. We're expanding to more locations regularly.",
   keywords:

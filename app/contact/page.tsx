@@ -140,7 +140,7 @@ export default function ContactPage() {
           <div className="flex flex-col gap-6">
             <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-soft">
               <h3 className="text-lg font-bold text-slate-900">{BUSINESS.name}</h3>
-              <p className="text-sm text-slate-500">Washing Machine Service Centre</p>
+              <p className="text-sm text-slate-500">{BUSINESS.tagline}</p>
               <ul className="mt-4 space-y-3 text-sm text-slate-600">
                 <li className="flex items-start gap-3">
                   <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-primary" />

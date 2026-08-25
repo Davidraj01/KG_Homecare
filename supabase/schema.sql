@@ -90,3 +90,20 @@ create policy "Authenticated manage services" on services
   for all
   using (auth.role() = 'authenticated')
   with check (auth.role() = 'authenticated');
+
+-- Storage bucket for service/SEO-page image uploads
+insert into storage.buckets (id, name, public)
+values ('images', 'images', true)
+on conflict (id) do nothing;
+
+drop policy if exists "Public read images" on storage.objects;
+drop policy if exists "Authenticated manage images" on storage.objects;
+
+create policy "Public read images" on storage.objects
+  for select
+  using (bucket_id = 'images');
+
+create policy "Authenticated manage images" on storage.objects
+  for all
+  using (bucket_id = 'images' and auth.role() = 'authenticated')
+  with check (bucket_id = 'images' and auth.role() = 'authenticated');

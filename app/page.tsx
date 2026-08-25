@@ -49,7 +49,7 @@ export default async function HomePage() {
           className="relative"
         >
           <ScrollReveal>
-            <ServicesGrid limit={8} items={services} />
+            <ServicesGrid limit={8} items={services} showBookButton={false} />
           </ScrollReveal>
         </Section>
       </div>

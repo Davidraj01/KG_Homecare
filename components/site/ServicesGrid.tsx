@@ -28,9 +28,11 @@ type GridItem = {
 export function ServicesGrid({
   limit,
   items,
+  showBookButton = true,
 }: {
   limit?: number;
   items?: GridItem[] | ServiceRecord[];
+  showBookButton?: boolean;
 }) {
   const source =
     items?.length
@@ -85,19 +87,21 @@ export function ServicesGrid({
           <div className="flex flex-1 flex-col p-4">
             <p className="text-sm leading-relaxed text-muted-foreground">{s.short}</p>
 
-            <div className="mt-auto grid grid-cols-2 gap-2 pt-3">
+            <div className={`mt-auto grid gap-2 pt-3 ${showBookButton ? "grid-cols-2" : "grid-cols-1"}`}>
               <Link
                 href={`/services/${s.slug}`}
                 className="flex items-center justify-center rounded-xl border border-border py-2.5 text-sm font-semibold text-foreground transition-colors hover:bg-secondary"
               >
                 Details
               </Link>
-              <Link
-                href="/contact"
-                className="flex items-center justify-center gap-1.5 rounded-xl bg-primary py-2.5 text-sm font-semibold text-white transition-colors hover:bg-primary/90"
-              >
-                Book <ArrowUpRight className="h-3.5 w-3.5" />
-              </Link>
+              {showBookButton ? (
+                <Link
+                  href="/contact"
+                  className="flex items-center justify-center gap-1.5 rounded-xl bg-primary py-2.5 text-sm font-semibold text-white transition-colors hover:bg-primary/90"
+                >
+                  Book <ArrowUpRight className="h-3.5 w-3.5" />
+                </Link>
+              ) : null}
             </div>
           </div>
         </article>

@@ -220,7 +220,7 @@ export default function AboutPage() {
           <div>
             <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-blue-400">About Us</p>
             <h1 className="mt-4 text-3xl font-extrabold leading-[1.1] tracking-tight text-white sm:text-4xl md:text-5xl">
-              Your trusted washing machine service centre since 2014.
+              Your trusted washing machine repair experts since 2014.
             </h1>
             <p className="mt-5 max-w-lg text-base leading-relaxed text-slate-300">
               KG Home Care is a family-run service with one mission — do one thing, washing machine service, and do it better than anyone else. Over 10 years and 5,000+ services later, we&apos;re still going strong.

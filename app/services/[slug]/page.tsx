@@ -102,7 +102,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       canonical: `/services/${slug}`,
     },
     openGraph: {
-      title: `${service.name} — KG Home Care | Washing Machine Service Centre`,
+      title: `${service.name} — KG Home Care`,
       description:
         "short" in service ? service.short : service.description || "",
       url: `/services/${slug}`,

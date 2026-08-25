@@ -5,7 +5,7 @@ import { Section } from "@/components/site/Section";
 import { CalendarCheck, Clock, ShieldCheck, Wrench } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Service Coverage — KG Home Care Washing Machine Service Centre",
+  title: "Service Coverage — KG Home Care",
   description:
     "KG Home Care is expanding its washing machine service coverage. Submit your details and we'll confirm availability in your area.",
   keywords:
