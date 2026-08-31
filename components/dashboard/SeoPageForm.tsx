@@ -47,19 +47,19 @@ function FormSection({
   children: React.ReactNode;
 }) {
   return (
-    <div className="rounded-2xl border border-slate-700/80 bg-slate-800/50 backdrop-blur-sm">
-      <div className="flex items-center gap-3 border-b border-slate-700/60 px-6 py-4">
-        <span className="grid h-8 w-8 place-items-center rounded-lg bg-blue-500/15 text-blue-400">
+    <div className="min-w-0 rounded-2xl border border-slate-700/80 bg-slate-800/50 backdrop-blur-sm">
+      <div className="flex flex-wrap items-center gap-3 border-b border-slate-700/60 px-4 py-4 sm:px-6">
+        <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-blue-500/15 text-blue-400">
           <Icon className="h-4 w-4" />
         </span>
-        <h2 className="text-sm font-bold text-white">{title}</h2>
+        <h2 className="min-w-0 flex-1 break-words text-sm font-bold text-white">{title}</h2>
         {badge && (
-          <span className="ml-auto rounded-md bg-slate-700/80 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-slate-400">
+          <span className="shrink-0 rounded-md bg-slate-700/80 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-slate-400">
             {badge}
           </span>
         )}
       </div>
-      <div className="p-6">{children}</div>
+      <div className="min-w-0 p-4 sm:p-6">{children}</div>
     </div>
   );
 }
@@ -132,9 +132,9 @@ export function SeoPageForm({ action, initialData, submitLabel }: SeoPageFormPro
         </div>
       </div>
 
-      <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_340px]">
+      <div className="grid min-w-0 gap-6 xl:grid-cols-[minmax(0,1fr)_340px]">
         {/* ─── Main column ─── */}
-        <div className="space-y-6">
+        <div className="min-w-0 space-y-6">
 
           {/* Section 1: Hero */}
           <FormSection icon={Megaphone} title="Section 1 — Hero" badge="Hero">
@@ -380,7 +380,7 @@ export function SeoPageForm({ action, initialData, submitLabel }: SeoPageFormPro
         </div>
 
         {/* ─── Sidebar column ─── */}
-        <div className="space-y-6">
+        <div className="min-w-0 space-y-6">
 
           {/* Page Settings */}
           <FormSection icon={Settings} title="Page Settings">

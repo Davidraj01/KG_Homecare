@@ -142,8 +142,8 @@ export function DashboardShell({
         </header>
 
         {/* page content */}
-        <main className="flex-1 overflow-y-auto overflow-x-hidden p-4 sm:p-6">
-          {children}
+        <main className="flex-1 overflow-auto p-4 sm:p-6">
+          <div className="min-w-0">{children}</div>
         </main>
       </div>
     </div>

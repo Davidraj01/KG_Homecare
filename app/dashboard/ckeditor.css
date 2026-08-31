@@ -1,4 +1,18 @@
 /* CKEditor Dark Theme Override */
+.ckeditor-dark {
+  max-width: 100%;
+}
+
+.ckeditor-dark .ck.ck-editor {
+  width: 100%;
+  max-width: 100%;
+}
+
+.ckeditor-dark .ck.ck-editor__editable {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
 .ckeditor-dark .ck.ck-editor__editable {
   min-height: 300px;
   background: #1e293b !important;
