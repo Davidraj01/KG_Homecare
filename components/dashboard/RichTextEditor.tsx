@@ -147,6 +147,15 @@ export function RichTextEditor({ name, defaultValue = "", placeholder }: RichTex
           data={value}
           onReady={(editor: any) => {
             editorRef.current = editor;
+            // With several editors on one page, the toolbar can measure its
+            // available width before the page layout (other editors mounting
+            // above it, fonts loading, etc.) has settled, and lock in the
+            // wrong grouping. Nudge it to re-check once things have settled.
+            [0, 300, 800].forEach((delay) => {
+              window.setTimeout(() => {
+                window.dispatchEvent(new Event("resize"));
+              }, delay);
+            });
           }}
           onChange={(_event: any, editor: any) => {
             setValue(editor.getData());
