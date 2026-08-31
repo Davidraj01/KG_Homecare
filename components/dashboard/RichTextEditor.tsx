@@ -97,7 +97,12 @@ export function RichTextEditor({ name, defaultValue = "", placeholder }: RichTex
             "|",
             "sourceEditing",
           ],
-          shouldNotGroupWhenFull: false,
+          // Wrap onto extra lines instead of collapsing extra buttons behind
+          // a "more items" menu — the collapsing mode depends on measuring
+          // available width at the right moment, which proved unreliable
+          // with several editors mounting on one page. Wrapping is plain
+          // CSS and can't fail the same way.
+          shouldNotGroupWhenFull: true,
         },
         table: {
           contentToolbar: ["tableColumn", "tableRow", "mergeTableCells"],
@@ -148,24 +153,6 @@ export function RichTextEditor({ name, defaultValue = "", placeholder }: RichTex
           data={value}
           onReady={(editor: any) => {
             editorRef.current = editor;
-            // With several editors on one page, the toolbar can measure its
-            // available width before the page layout above it has settled,
-            // and lock in the wrong (too-wide) grouping. CKEditor's grouping
-            // watches its own element's size via ResizeObserver, so a plain
-            // window "resize" event doesn't trigger it — the element itself
-            // has to actually change size. Force a real, tiny resize of the
-            // wrapper to make that observer fire and re-measure correctly.
-            const nudge = () => {
-              const el = wrapperRef.current;
-              if (!el) return;
-              el.style.width = "calc(100% - 1px)";
-              requestAnimationFrame(() => {
-                el.style.width = "";
-              });
-            };
-            [50, 300, 800, 1500].forEach((delay) => {
-              window.setTimeout(nudge, delay);
-            });
           }}
           onChange={(_event: any, editor: any) => {
             setValue(editor.getData());
