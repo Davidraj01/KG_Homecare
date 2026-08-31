@@ -12,6 +12,7 @@ export function RichTextEditor({ name, defaultValue = "", placeholder }: RichTex
   const [value, setValue] = useState(defaultValue);
   const [Editor, setEditor] = useState<any>(null);
   const editorRef = useRef<any>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -140,7 +141,7 @@ export function RichTextEditor({ name, defaultValue = "", placeholder }: RichTex
   return (
     <>
       <input type="hidden" name={name} value={value} />
-      <div className="ckeditor-dark">
+      <div className="ckeditor-dark" ref={wrapperRef}>
         <CKEditor
           editor={ClassicEditor}
           config={editorConfig}
@@ -148,13 +149,22 @@ export function RichTextEditor({ name, defaultValue = "", placeholder }: RichTex
           onReady={(editor: any) => {
             editorRef.current = editor;
             // With several editors on one page, the toolbar can measure its
-            // available width before the page layout (other editors mounting
-            // above it, fonts loading, etc.) has settled, and lock in the
-            // wrong grouping. Nudge it to re-check once things have settled.
-            [0, 300, 800].forEach((delay) => {
-              window.setTimeout(() => {
-                window.dispatchEvent(new Event("resize"));
-              }, delay);
+            // available width before the page layout above it has settled,
+            // and lock in the wrong (too-wide) grouping. CKEditor's grouping
+            // watches its own element's size via ResizeObserver, so a plain
+            // window "resize" event doesn't trigger it — the element itself
+            // has to actually change size. Force a real, tiny resize of the
+            // wrapper to make that observer fire and re-measure correctly.
+            const nudge = () => {
+              const el = wrapperRef.current;
+              if (!el) return;
+              el.style.width = "calc(100% - 1px)";
+              requestAnimationFrame(() => {
+                el.style.width = "";
+              });
+            };
+            [50, 300, 800, 1500].forEach((delay) => {
+              window.setTimeout(nudge, delay);
             });
           }}
           onChange={(_event: any, editor: any) => {

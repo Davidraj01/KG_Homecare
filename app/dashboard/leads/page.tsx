@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { format } from "date-fns";
+import { Phone, Wrench } from "lucide-react";
 import { getLeads } from "@/lib/cms";
 
 export default async function LeadsPage() {
@@ -12,50 +13,67 @@ export default async function LeadsPage() {
         <p className="mt-2 text-muted-foreground">Customer enquiries submitted through the website.</p>
       </section>
 
-      <div className="overflow-hidden rounded-3xl border bg-white shadow-soft">
-        {leads.length === 0 ? (
-          <p className="p-8 text-center text-sm text-muted-foreground">No leads yet.</p>
-        ) : (
-          <div className="overflow-x-auto">
-            <table className="min-w-full text-left text-sm">
-              <thead className="bg-secondary/60">
-                <tr>
-                  <th className="px-5 py-4 font-medium text-muted-foreground">Customer</th>
-                  <th className="px-5 py-4 font-medium text-muted-foreground">Request</th>
-                  <th className="px-5 py-4 font-medium text-muted-foreground">Status</th>
-                  <th className="px-5 py-4 font-medium text-muted-foreground">Received</th>
-                  <th className="px-5 py-4 font-medium text-muted-foreground">Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {leads.map((lead) => (
-                  <tr key={lead.id} className="border-t">
-                    <td className="px-5 py-4">
-                      <p className="font-semibold">{lead.name}</p>
-                      <p className="text-xs text-muted-foreground">{lead.phone}</p>
-                    </td>
-                    <td className="px-5 py-4">
-                      <p>{lead.service || "-"}</p>
-                      {lead.brand ? <p className="text-xs text-muted-foreground">{lead.brand}</p> : null}
-                    </td>
-                    <td className="px-5 py-4">
-                      <span className="rounded-full bg-secondary px-2.5 py-1 text-xs font-semibold">{lead.status}</span>
-                    </td>
-                    <td className="px-5 py-4 text-muted-foreground">
-                      {lead.created_at ? format(new Date(lead.created_at), "dd MMM yyyy, p") : "-"}
-                    </td>
-                    <td className="px-5 py-4">
-                      <Link href={`/dashboard/leads/${lead.id}`} className="font-medium text-primary hover:underline">
-                        View
-                      </Link>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
-      </div>
+      {leads.length === 0 ? (
+        <div className="rounded-3xl border bg-white p-8 text-center text-sm text-muted-foreground shadow-soft">
+          No leads yet.
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
+          {leads.map((lead) => (
+            <div
+              key={lead.id}
+              className="flex min-w-0 flex-col overflow-hidden rounded-2xl border bg-white p-5 shadow-soft"
+            >
+              <div className="flex items-start justify-between gap-3">
+                <div className="min-w-0">
+                  <p className="break-words font-semibold">{lead.name}</p>
+                  <p className="mt-0.5 flex items-center gap-1 text-xs text-muted-foreground">
+                    <Phone className="h-3 w-3 shrink-0" /> {lead.phone}
+                  </p>
+                </div>
+                <span className="shrink-0 rounded-full bg-secondary px-2.5 py-1 text-xs font-semibold">
+                  {lead.status}
+                </span>
+              </div>
+
+              <dl className="mt-4 space-y-1.5 text-xs">
+                <div className="flex flex-wrap items-baseline gap-x-2">
+                  <dt className="shrink-0 text-muted-foreground">Service</dt>
+                  <dd className="min-w-0 break-words">{lead.service || "-"}</dd>
+                </div>
+                {lead.brand ? (
+                  <div className="flex flex-wrap items-baseline gap-x-2">
+                    <dt className="shrink-0 text-muted-foreground">Brand</dt>
+                    <dd className="min-w-0 break-words">{lead.brand}</dd>
+                  </div>
+                ) : null}
+                <div className="flex flex-wrap items-baseline gap-x-2">
+                  <dt className="shrink-0 text-muted-foreground">Received</dt>
+                  <dd className="min-w-0 break-words">
+                    {lead.created_at ? format(new Date(lead.created_at), "dd MMM yyyy, p") : "-"}
+                  </dd>
+                </div>
+              </dl>
+
+              {lead.message ? (
+                <p className="mt-3 line-clamp-2 flex items-start gap-1.5 text-xs text-muted-foreground">
+                  <Wrench className="mt-0.5 h-3 w-3 shrink-0" />
+                  <span className="break-words">{lead.message}</span>
+                </p>
+              ) : null}
+
+              <div className="mt-4 border-t pt-4">
+                <Link
+                  href={`/dashboard/leads/${lead.id}`}
+                  className="block w-full rounded-lg border px-3 py-1.5 text-center text-xs font-semibold text-primary hover:bg-secondary"
+                >
+                  View
+                </Link>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
