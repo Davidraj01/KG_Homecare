@@ -32,18 +32,18 @@ export default async function SeoPagesPage() {
           No SEO pages yet.
         </div>
       ) : (
-        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
           {pages.map((page) => (
             <div
               key={page.id}
-              className="flex flex-col rounded-2xl border border-slate-700/80 bg-slate-800/50 p-5"
+              className="flex min-w-0 flex-col overflow-hidden rounded-2xl border border-slate-700/80 bg-slate-800/50 p-5"
             >
               <div className="flex items-start justify-between gap-3">
                 <div className="min-w-0">
-                  <p className="truncate font-semibold text-white" title={page.title}>{page.title}</p>
+                  <p className="break-words font-semibold text-white">{page.title}</p>
                   {page.location ? (
-                    <p className="mt-0.5 flex items-center gap-1 text-xs text-slate-400">
-                      <MapPin className="h-3 w-3 shrink-0" /> {page.location}
+                    <p className="mt-0.5 flex items-start gap-1 text-xs text-slate-400">
+                      <MapPin className="h-3 w-3 shrink-0 translate-y-0.5" /> <span className="break-words">{page.location}</span>
                     </p>
                   ) : null}
                 </div>
@@ -57,12 +57,12 @@ export default async function SeoPagesPage() {
               </div>
 
               <dl className="mt-4 space-y-1.5 text-xs">
-                <div className="flex items-center gap-2">
-                  <dt className="text-slate-500">Slug</dt>
-                  <dd className="truncate text-slate-300">/{page.slug}</dd>
+                <div className="flex flex-wrap items-baseline gap-x-2">
+                  <dt className="shrink-0 text-slate-500">Slug</dt>
+                  <dd className="min-w-0 break-all text-slate-300">/{page.slug}</dd>
                 </div>
                 <div className="flex items-center gap-2">
-                  <dt className="text-slate-500">Template</dt>
+                  <dt className="shrink-0 text-slate-500">Template</dt>
                   <dd className="text-slate-300">{page.template}</dd>
                 </div>
               </dl>
