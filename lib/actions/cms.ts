@@ -11,6 +11,7 @@ import {
 } from "@/lib/cms.types";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 import { hasSupabaseEnv } from "@/lib/supabase/env";
+import { waHref } from "@/lib/contact";
 
 type ActionState = {
   success: boolean;
@@ -144,9 +145,21 @@ export async function createLeadAction(
 
   revalidateLeads();
 
+  const waLines = [
+    "Hi KG Home Care, I'd like to book a washing machine service.",
+    "",
+    `Name: ${name}`,
+    `Phone: ${phone}`,
+    location ? `Location: ${location}` : null,
+    service ? `Service: ${service}` : null,
+    brand ? `Brand: ${brand}` : null,
+    message ? `Issue: ${message}` : null,
+  ].filter(Boolean);
+  const waUrl = waHref(waLines.join("\n"));
+
   return {
     success: true,
-    message: "Thanks! We've received your request and will get back to you shortly.",
+    message: waUrl,
   };
 }
 

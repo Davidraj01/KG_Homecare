@@ -15,7 +15,8 @@ export function LeadCaptureForm() {
   useEffect(() => {
     if (!state.message) return;
     if (state.success) {
-      toast.success(state.message);
+      toast.success("Request submitted! Redirecting to WhatsApp...");
+      window.open(state.message, "_blank", "noopener,noreferrer");
     } else {
       toast.error(state.message);
     }
