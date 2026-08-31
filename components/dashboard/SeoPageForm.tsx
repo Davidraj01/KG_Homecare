@@ -132,9 +132,9 @@ export function SeoPageForm({ action, initialData, submitLabel }: SeoPageFormPro
         </div>
       </div>
 
-      <div className="grid min-w-0 gap-6 xl:grid-cols-[minmax(0,1fr)_340px]">
+      <div className="flex flex-col gap-6 xl:flex-row xl:items-start">
         {/* ─── Main column ─── */}
-        <div className="min-w-0 space-y-6">
+        <div className="min-w-0 w-full flex-1 space-y-6">
 
           {/* Section 1: Hero */}
           <FormSection icon={Megaphone} title="Section 1 — Hero" badge="Hero">
@@ -380,7 +380,7 @@ export function SeoPageForm({ action, initialData, submitLabel }: SeoPageFormPro
         </div>
 
         {/* ─── Sidebar column ─── */}
-        <div className="min-w-0 space-y-6">
+        <div className="min-w-0 w-full space-y-6 xl:w-[340px] xl:shrink-0">
 
           {/* Page Settings */}
           <FormSection icon={Settings} title="Page Settings">
@@ -509,8 +509,8 @@ export function SeoPageForm({ action, initialData, submitLabel }: SeoPageFormPro
             </div>
           </div>
 
-          {/* Publish */}
-          <div className="rounded-2xl border border-slate-700/80 bg-gradient-to-b from-slate-800/80 to-slate-900/80 p-6 backdrop-blur-sm">
+          {/* Publish — desktop only; mobile uses the sticky bar below */}
+          <div className="hidden rounded-2xl border border-slate-700/80 bg-gradient-to-b from-slate-800/80 to-slate-900/80 p-6 backdrop-blur-sm xl:block">
             <div className="space-y-3">
               <Button
                 type="submit"
@@ -530,6 +530,31 @@ export function SeoPageForm({ action, initialData, submitLabel }: SeoPageFormPro
               </Button>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* spacer so the sticky mobile bar never covers the last field */}
+      <div className="h-20 xl:hidden" />
+
+      {/* Publish — mobile/tablet sticky bar, always reachable without scrolling to the end */}
+      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-slate-700 bg-slate-900/95 p-3 backdrop-blur-sm xl:hidden">
+        <div className="mx-auto flex max-w-3xl gap-3">
+          <Button
+            type="button"
+            variant="outline"
+            className="flex-1 rounded-xl border-slate-600 bg-transparent py-2.5 text-sm font-semibold text-slate-300 hover:bg-slate-700 hover:text-white"
+            onClick={() => router.push("/dashboard/seo-pages")}
+          >
+            Cancel
+          </Button>
+          <Button
+            type="submit"
+            disabled={pending}
+            className="flex-[2] gap-2 rounded-xl bg-blue-600 py-2.5 text-sm font-bold text-white shadow-[0_4px_14px_-2px_rgba(59,130,246,0.4)] hover:bg-blue-500"
+          >
+            <Send className="h-3.5 w-3.5" />
+            {pending ? "Saving..." : submitLabel}
+          </Button>
         </div>
       </div>
     </form>

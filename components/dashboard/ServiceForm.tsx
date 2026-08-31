@@ -39,11 +39,11 @@ export function ServiceForm({ action, initialData, submitLabel }: ServiceFormPro
   }, [router, state]);
 
   return (
-    <form action={formAction} className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_320px]">
+    <form action={formAction} className="flex flex-col gap-6 xl:flex-row xl:items-start">
       <input type="hidden" name="remove_image" value={removeImage ? "true" : "false"} />
       <input type="hidden" name="existing_image_url" value={initialData?.image_url ?? ""} />
 
-      <div className="space-y-6">
+      <div className="min-w-0 w-full flex-1 space-y-6">
         <Card className="shadow-soft">
           <CardHeader>
             <CardTitle>Basic information</CardTitle>
@@ -157,7 +157,7 @@ export function ServiceForm({ action, initialData, submitLabel }: ServiceFormPro
         </Card>
       </div>
 
-      <div className="space-y-6">
+      <div className="min-w-0 w-full space-y-6 xl:w-[320px] xl:shrink-0">
         <Card className="shadow-soft">
           <CardHeader>
             <CardTitle>Featured image</CardTitle>
@@ -189,7 +189,7 @@ export function ServiceForm({ action, initialData, submitLabel }: ServiceFormPro
           </CardContent>
         </Card>
 
-        <Card className="shadow-soft">
+        <Card className="hidden shadow-soft xl:block">
           <CardHeader>
             <CardTitle>Publish</CardTitle>
           </CardHeader>
@@ -202,6 +202,26 @@ export function ServiceForm({ action, initialData, submitLabel }: ServiceFormPro
             </Button>
           </CardContent>
         </Card>
+      </div>
+
+      {/* spacer so the sticky mobile bar never covers the last field */}
+      <div className="h-20 xl:hidden" />
+
+      {/* Publish — mobile/tablet sticky bar, always reachable without scrolling to the end */}
+      <div className="fixed inset-x-0 bottom-0 z-40 border-t bg-background/95 p-3 backdrop-blur-sm xl:hidden">
+        <div className="mx-auto flex max-w-3xl gap-3">
+          <Button
+            type="button"
+            variant="outline"
+            className="flex-1"
+            onClick={() => router.push("/dashboard/services")}
+          >
+            Cancel
+          </Button>
+          <Button type="submit" className="flex-[2]" disabled={pending}>
+            {pending ? "Saving..." : submitLabel}
+          </Button>
+        </div>
       </div>
     </form>
   );
