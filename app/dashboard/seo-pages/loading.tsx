@@ -1,45 +1,37 @@
 export default function SeoPagesLoading() {
   return (
     <div className="space-y-6 animate-pulse">
-      <div className="flex flex-wrap items-center justify-between gap-4 rounded-3xl border bg-white p-8 shadow-soft">
-        <div>
-          <div className="h-8 w-32 rounded bg-slate-200 mb-2" />
-          <div className="h-4 w-80 rounded bg-slate-200" />
+      <div className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-slate-700/80 bg-slate-800/50 p-8">
+        <div className="flex items-center gap-4">
+          <div className="h-10 w-10 rounded-xl bg-slate-700" />
+          <div>
+            <div className="h-6 w-32 rounded bg-slate-700 mb-2" />
+            <div className="h-4 w-56 rounded bg-slate-700" />
+          </div>
         </div>
-        <div className="h-10 w-32 rounded-lg bg-slate-200" />
+        <div className="h-10 w-36 rounded-lg bg-slate-700" />
       </div>
 
-      <div className="overflow-hidden rounded-3xl border bg-white shadow-soft">
-        <table className="min-w-full text-left text-sm">
-          <thead className="bg-secondary/60">
-            <tr>
-              {["Page", "Slug", "Template", "Status", "Actions"].map((h) => (
-                <th key={h} className="px-5 py-4">
-                  <div className="h-4 w-20 rounded bg-slate-200" />
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {[...Array(5)].map((_, i) => (
-              <tr key={i} className="border-t">
-                <td className="px-5 py-4">
-                  <div className="h-4 w-44 rounded bg-slate-200 mb-2" />
-                  <div className="h-3 w-32 rounded bg-slate-200" />
-                </td>
-                <td className="px-5 py-4"><div className="h-4 w-36 rounded bg-slate-200" /></td>
-                <td className="px-5 py-4"><div className="h-4 w-20 rounded bg-slate-200" /></td>
-                <td className="px-5 py-4"><div className="h-6 w-16 rounded-full bg-slate-200" /></td>
-                <td className="px-5 py-4">
-                  <div className="flex gap-2">
-                    <div className="h-8 w-14 rounded-lg bg-slate-200" />
-                    <div className="h-8 w-16 rounded-lg bg-slate-200" />
-                  </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+        {[...Array(6)].map((_, i) => (
+          <div key={i} className="rounded-2xl border border-slate-700/80 bg-slate-800/50 p-5">
+            <div className="flex items-start justify-between gap-3">
+              <div className="w-full">
+                <div className="h-4 w-3/4 rounded bg-slate-700 mb-2" />
+                <div className="h-3 w-1/2 rounded bg-slate-700" />
+              </div>
+              <div className="h-5 w-16 shrink-0 rounded-full bg-slate-700" />
+            </div>
+            <div className="mt-4 space-y-2">
+              <div className="h-3 w-2/3 rounded bg-slate-700" />
+              <div className="h-3 w-1/3 rounded bg-slate-700" />
+            </div>
+            <div className="mt-4 flex gap-2 border-t border-slate-700/60 pt-4">
+              <div className="h-8 flex-1 rounded-lg bg-slate-700" />
+              <div className="h-8 flex-1 rounded-lg bg-slate-700" />
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Plus, FileText } from "lucide-react";
+import { Plus, FileText, MapPin } from "lucide-react";
 import { getSeoPages } from "@/lib/cms";
 import { deleteSeoPageAction } from "@/lib/actions/cms";
 import { Button } from "@/components/ui/button";
@@ -27,66 +27,69 @@ export default async function SeoPagesPage() {
         </Button>
       </div>
 
-      <div className="overflow-hidden rounded-2xl border border-slate-700/80 bg-slate-800/50">
-        {pages.length === 0 ? (
-          <p className="p-8 text-center text-sm text-slate-400">No SEO pages yet.</p>
-        ) : (
-          <div className="overflow-x-auto">
-            <table className="min-w-full text-left text-sm">
-              <thead className="bg-slate-900/60">
-                <tr>
-                  <th className="px-5 py-4 font-medium text-slate-400">Page</th>
-                  <th className="px-5 py-4 font-medium text-slate-400">Slug</th>
-                  <th className="px-5 py-4 font-medium text-slate-400">Template</th>
-                  <th className="px-5 py-4 font-medium text-slate-400">Status</th>
-                  <th className="px-5 py-4 font-medium text-slate-400">Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {pages.map((page) => (
-                  <tr key={page.id} className="border-t border-slate-700/60">
-                    <td className="px-5 py-4">
-                      <p className="font-semibold text-white">{page.title}</p>
-                      {page.location ? <p className="text-xs text-slate-400">{page.location}</p> : null}
-                    </td>
-                    <td className="px-5 py-4 text-slate-400">/{page.slug}</td>
-                    <td className="px-5 py-4 text-slate-400">{page.template}</td>
-                    <td className="px-5 py-4">
-                      <span
-                        className={`rounded-full px-2.5 py-1 text-xs font-semibold ${
-                          page.status === "Published" ? "bg-emerald-500/15 text-emerald-400" : "bg-slate-700 text-slate-300"
-                        }`}
-                      >
-                        {page.status}
-                      </span>
-                    </td>
-                    <td className="px-5 py-4">
-                      <div className="flex flex-wrap gap-2">
-                        <Link
-                          href={`/dashboard/seo-pages/${page.id}/edit`}
-                          className="rounded-lg border border-slate-600 px-3 py-1.5 text-xs font-semibold text-white hover:bg-slate-700"
-                        >
-                          Edit
-                        </Link>
-                        <form
-                          action={deleteSeoPageAction.bind(null, page.id, page.image_url, page.slug, page.section2_image_url)}
-                        >
-                          <button
-                            type="submit"
-                            className="rounded-lg border border-red-500/30 px-3 py-1.5 text-xs font-semibold text-red-400 hover:bg-red-500/10"
-                          >
-                            Delete
-                          </button>
-                        </form>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
-      </div>
+      {pages.length === 0 ? (
+        <div className="rounded-2xl border border-slate-700/80 bg-slate-800/50 p-8 text-center text-sm text-slate-400">
+          No SEO pages yet.
+        </div>
+      ) : (
+        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+          {pages.map((page) => (
+            <div
+              key={page.id}
+              className="flex flex-col rounded-2xl border border-slate-700/80 bg-slate-800/50 p-5"
+            >
+              <div className="flex items-start justify-between gap-3">
+                <div className="min-w-0">
+                  <p className="truncate font-semibold text-white" title={page.title}>{page.title}</p>
+                  {page.location ? (
+                    <p className="mt-0.5 flex items-center gap-1 text-xs text-slate-400">
+                      <MapPin className="h-3 w-3 shrink-0" /> {page.location}
+                    </p>
+                  ) : null}
+                </div>
+                <span
+                  className={`shrink-0 rounded-full px-2.5 py-1 text-xs font-semibold ${
+                    page.status === "Published" ? "bg-emerald-500/15 text-emerald-400" : "bg-slate-700 text-slate-300"
+                  }`}
+                >
+                  {page.status}
+                </span>
+              </div>
+
+              <dl className="mt-4 space-y-1.5 text-xs">
+                <div className="flex items-center gap-2">
+                  <dt className="text-slate-500">Slug</dt>
+                  <dd className="truncate text-slate-300">/{page.slug}</dd>
+                </div>
+                <div className="flex items-center gap-2">
+                  <dt className="text-slate-500">Template</dt>
+                  <dd className="text-slate-300">{page.template}</dd>
+                </div>
+              </dl>
+
+              <div className="mt-4 flex gap-2 border-t border-slate-700/60 pt-4">
+                <Link
+                  href={`/dashboard/seo-pages/${page.id}/edit`}
+                  className="flex-1 rounded-lg border border-slate-600 px-3 py-1.5 text-center text-xs font-semibold text-white hover:bg-slate-700"
+                >
+                  Edit
+                </Link>
+                <form
+                  action={deleteSeoPageAction.bind(null, page.id, page.image_url, page.slug, page.section2_image_url)}
+                  className="flex-1"
+                >
+                  <button
+                    type="submit"
+                    className="w-full rounded-lg border border-red-500/30 px-3 py-1.5 text-xs font-semibold text-red-400 hover:bg-red-500/10"
+                  >
+                    Delete
+                  </button>
+                </form>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
