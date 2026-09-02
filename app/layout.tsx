@@ -5,7 +5,9 @@ import { BUSINESS } from "@/lib/contact";
 import "./globals.css";
 
 const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
-const GOOGLE_SITE_VERIFICATION = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
+const GOOGLE_SITE_VERIFICATION =
+  process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION ||
+  "_3Xc52UeNf49StI2V1MN0J_G2cd-Tnftt30MzMNW53w";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://kghomecare.in"),
