@@ -12,6 +12,7 @@ import { Reviews } from "@/components/site/Reviews";
 import { FaqAccordion } from "@/components/site/FaqAccordion";
 import { HomeContact } from "@/components/site/HomeContact";
 import { ServicesGrid } from "@/components/site/ServicesGrid";
+import { IndiaCoverageBanner } from "@/components/site/IndiaCoverageBanner";
 
 export const revalidate = 60;
 
@@ -149,6 +150,8 @@ export default async function HomePage() {
           </ScrollReveal>
         </Section>
       </div>
+
+      <IndiaCoverageBanner />
     </>
   );
 }
