@@ -74,6 +74,7 @@ export function SiteFooter() {
       <div className="border-t border-white/8">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-4 py-4 text-xs text-white/30 sm:flex-row sm:px-6 lg:px-8">
           <p>© {new Date().getFullYear()} {BUSINESS.name}. All rights reserved.</p>
+          <p>Developed by Skiez Technologies India Pvt Ltd</p>
         </div>
       </div>
     </footer>
