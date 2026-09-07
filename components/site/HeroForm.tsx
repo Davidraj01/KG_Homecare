@@ -118,7 +118,7 @@ export function HeroForm() {
         </Button>
 
         <p className="mt-3 text-center text-sm font-medium text-white/70">
-          Service Charges – ₹400
+          We provide service all over India
         </p>
       </div>
     </form>
