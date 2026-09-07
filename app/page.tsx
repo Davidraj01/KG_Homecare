@@ -145,9 +145,7 @@ export default async function HomePage() {
           style={{ backgroundImage: "radial-gradient(#94a3b8 1.2px, transparent 1.2px)", backgroundSize: "28px 28px" }}
         />
         <Section eyebrow="Get In Touch" title="Book your service today" className="relative">
-          <ScrollReveal>
-            <HomeContact />
-          </ScrollReveal>
+          <HomeContact />
         </Section>
       </div>
 

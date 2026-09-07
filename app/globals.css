@@ -189,4 +189,11 @@
     from { opacity: 0; transform: scaleY(0.6) scaleX(0.92); }
     to   { opacity: 1; transform: scaleY(1) scaleX(1); }
   }
+  .animate-pulse-glow {
+    animation: pulse-glow 2.2s ease-in-out infinite;
+  }
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 4px 16px -4px rgba(24,95,165,0.45); }
+    50%      { box-shadow: 0 6px 28px -2px rgba(24,95,165,0.8); }
+  }
 }

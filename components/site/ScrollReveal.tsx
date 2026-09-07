@@ -8,6 +8,7 @@ interface Props {
   delay?: number;        // ms delay before animating
   distance?: number;     // px to travel (default 40)
   duration?: number;     // ms (default 700)
+  scaleFrom?: number;    // starting scale, e.g. 0.94 (default: no scale animation)
 }
 
 export function ScrollReveal({
@@ -16,6 +17,7 @@ export function ScrollReveal({
   delay = 0,
   distance = 40,
   duration = 700,
+  scaleFrom,
 }: Props) {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -23,9 +25,11 @@ export function ScrollReveal({
     const el = ref.current;
     if (!el) return;
 
+    const hiddenScale = scaleFrom ? ` scale(${scaleFrom})` : "";
+
     // Set initial hidden state
     el.style.opacity = "0";
-    el.style.transform = `translateY(${distance}px)`;
+    el.style.transform = `translateY(${distance}px)${hiddenScale}`;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -33,7 +37,7 @@ export function ScrollReveal({
         setTimeout(() => {
           el.style.transition = `opacity ${duration}ms cubic-bezier(0.16,1,0.3,1), transform ${duration}ms cubic-bezier(0.16,1,0.3,1)`;
           el.style.opacity = "1";
-          el.style.transform = "translateY(0)";
+          el.style.transform = "translateY(0) scale(1)";
         }, delay);
         observer.unobserve(el);
       },
@@ -42,7 +46,7 @@ export function ScrollReveal({
 
     observer.observe(el);
     return () => observer.disconnect();
-  }, [delay, distance, duration]);
+  }, [delay, distance, duration, scaleFrom]);
 
   return (
     <div ref={ref} className={className}>

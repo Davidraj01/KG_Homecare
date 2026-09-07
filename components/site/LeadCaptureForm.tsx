@@ -93,7 +93,7 @@ export function LeadCaptureForm() {
       <button
         type="submit"
         disabled={pending}
-        className="group flex w-full items-center justify-center gap-2.5 rounded-xl bg-[#185FA5] px-6 py-3.5 text-sm font-bold text-white shadow-[0_4px_16px_-4px_rgba(24,95,165,0.45)] transition-all hover:bg-[#185FA5]/90 hover:-translate-y-px active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60"
+        className="group flex w-full items-center justify-center gap-2.5 rounded-xl bg-[#185FA5] px-6 py-3.5 text-sm font-bold text-white shadow-[0_4px_16px_-4px_rgba(24,95,165,0.45)] transition-all hover:bg-[#185FA5]/90 hover:-translate-y-px hover:scale-[1.015] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60 disabled:animate-none animate-pulse-glow"
       >
         {pending ? (
           <><Loader2 className="h-4 w-4 animate-spin" /> Submitting…</>
