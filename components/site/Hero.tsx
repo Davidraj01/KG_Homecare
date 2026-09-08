@@ -1,6 +1,5 @@
-import { ShieldCheck, Wrench, Truck, Award, Clock, ArrowRight } from "lucide-react";
+import { ShieldCheck, Wrench, Truck, Award, Clock } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 import { HeroForm } from "@/components/site/HeroForm";
 
 const BADGES = [
@@ -63,20 +62,10 @@ export function Hero() {
                 </li>
               ))}
             </ul>
-
-            <div className="mt-9">
-              <Link
-                href="#book"
-                className="group inline-flex items-center gap-2 rounded-2xl bg-primary px-7 py-3.5 text-sm font-bold text-primary-foreground shadow-[0_0_30px_-5px_rgba(0,87,255,0.4)] transition-all hover:scale-[1.02] hover:bg-primary/90 hover:shadow-[0_0_40px_-5px_rgba(0,87,255,0.6)] active:scale-95 lg:hidden"
-              >
-                Book Now
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </Link>
-            </div>
           </div>
 
           {/* Right — technician "presenting" the booking form */}
-          <div className="relative hidden lg:block lg:pt-12">
+          <div className="relative mt-14 pt-12 lg:mt-0">
             <div className="pointer-events-none absolute -top-12 left-4 z-20 h-28 w-28 overflow-hidden rounded-2xl border-4 border-white/15 shadow-2xl animate-technician-in">
               <Image
                 src="/hero-technician.jpg"
