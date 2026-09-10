@@ -43,14 +43,12 @@ export async function generateMetadata({ params }: SeoPageProps): Promise<Metada
     title: { absolute: parsed.title || page.heading || page.title },
     ...(parsed.description ? { description: parsed.description } : {}),
     ...(parsed.keywords ? { keywords: parsed.keywords } : {}),
-    ...(parsed.canonical ? { alternates: { canonical: parsed.canonical } } : {
-      alternates: { canonical: `https://kghomecare.in/${page.slug}` },
-    }),
+    alternates: { canonical: `https://kghomecare.in/${page.slug}` },
     ...(parsed.robots ? { robots: parsed.robots } : {}),
     openGraph: {
       title: parsed.ogTitle || parsed.title || page.heading || page.title,
       ...(parsed.ogDescription || parsed.description ? { description: parsed.ogDescription || parsed.description } : {}),
-      url: parsed.ogUrl || `https://kghomecare.in/${page.slug}`,
+      url: `https://kghomecare.in/${page.slug}`,
       ...(parsed.ogImage ? { images: [parsed.ogImage] } : {}),
       ...(parsed.ogType ? { type: parsed.ogType as "website" | "article" } : {}),
     },
