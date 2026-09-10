@@ -6,7 +6,7 @@ export const BUSINESS = {
   address: {
     line1: "7/1, Kovil Street,",
     line2: "Pudukkottai – 628103",
-    city: "Tuticorin",
+    city: "Thoothukudi",
   },
   hours: "Mon – Sun · 8:00 AM – 9:00 PM",
 };
