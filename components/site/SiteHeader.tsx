@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
@@ -54,10 +55,19 @@ export function SiteHeader() {
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
 
           {/* Logo */}
-          <Link href="/" className="flex shrink-0 flex-col leading-none" aria-label="KG Home Care">
-            <span className="text-[15px] font-extrabold tracking-tight text-foreground">KG Home Care</span>
+          <Link href="/" className="flex shrink-0 items-center gap-2.5" aria-label="KG Home Care home">
+            <Image
+              src="/logos/kg_homecare_logo.png"
+              alt="KG Home Care"
+              width={1254}
+              height={1254}
+              priority
+              className="h-11 w-11 rounded-md object-contain sm:h-12 sm:w-12"
+            />
             {isHome ? (
-              <span className="text-[10px] font-medium tracking-wide text-muted-foreground">Washing Machine Service Centre</span>
+              <span className="hidden text-[10px] font-medium uppercase tracking-wide text-muted-foreground sm:inline">
+                Washing Machine Service Centre
+              </span>
             ) : null}
           </Link>
 
@@ -123,11 +133,20 @@ export function SiteHeader() {
       >
         {/* header row */}
         <div className="flex items-center justify-between border-b border-border/50 px-6 py-5">
-          <div>
-            <p className="text-base font-extrabold tracking-tight text-foreground">KG Home Care</p>
-            {isHome ? (
-              <p className="text-[11px] text-muted-foreground">Washing Machine Service Centre</p>
-            ) : null}
+          <div className="flex items-center gap-2.5">
+            <Image
+              src="/logos/kg_homecare_logo.png"
+              alt="KG Home Care"
+              width={1254}
+              height={1254}
+              className="h-10 w-10 rounded-md object-contain"
+            />
+            <div>
+              <p className="text-base font-extrabold tracking-tight text-foreground">KG Home Care</p>
+              {isHome ? (
+                <p className="text-[11px] text-muted-foreground">Washing Machine Service Centre</p>
+              ) : null}
+            </div>
           </div>
           <button
             type="button"

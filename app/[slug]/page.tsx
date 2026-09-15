@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Script from "next/script";
 import { notFound } from "next/navigation";
-import { BUSINESS } from "@/lib/contact";
+import { BUSINESS, LOGO_URL } from "@/lib/contact";
 import { getPublishedSeoPageBySlug } from "@/lib/cms";
 import { Section } from "@/components/site/Section";
 import { ScrollReveal } from "@/components/site/ScrollReveal";
@@ -49,7 +49,7 @@ export async function generateMetadata({ params }: SeoPageProps): Promise<Metada
       title: parsed.ogTitle || parsed.title || page.heading || page.title,
       ...(parsed.ogDescription || parsed.description ? { description: parsed.ogDescription || parsed.description } : {}),
       url: `https://kghomecare.in/${page.slug}`,
-      ...(parsed.ogImage ? { images: [parsed.ogImage] } : {}),
+      images: [parsed.ogImage || LOGO_URL],
       ...(parsed.ogType ? { type: parsed.ogType as "website" | "article" } : {}),
     },
     other: parsed.otherMeta,
@@ -142,6 +142,8 @@ export default async function SeoPage({ params }: SeoPageProps) {
     description: page.subheading || BUSINESS.tagline,
     ...(page.location ? { areaServed: [page.location] } : {}),
     url: `https://kghomecare.in/${page.slug}`,
+    image: LOGO_URL,
+    logo: LOGO_URL,
   };
 
   const faqSchema =

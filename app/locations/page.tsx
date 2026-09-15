@@ -4,6 +4,7 @@ import { MapPin } from "lucide-react";
 import { getPublishedSeoPages } from "@/lib/cms";
 import { Section } from "@/components/site/Section";
 import { ScrollReveal } from "@/components/site/ScrollReveal";
+import { LOGO_URL } from "@/lib/contact";
 
 export const metadata: Metadata = {
   title: "Locations — KG Home Care",
@@ -16,6 +17,7 @@ export const metadata: Metadata = {
     description:
       "All locations where KG Home Care provides doorstep washing machine service.",
     url: "/locations",
+    images: [LOGO_URL],
   },
   alternates: { canonical: "/locations" },
 };

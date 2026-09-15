@@ -5,6 +5,7 @@ import { ContactCTA } from "@/components/site/ContactCTA";
 import { Section } from "@/components/site/Section";
 import { ScrollReveal } from "@/components/site/ScrollReveal";
 import { ServiceHeroForm } from "@/components/site/ServiceHeroForm";
+import { LOGO_URL } from "@/lib/contact";
 
 export const metadata: Metadata = {
   title: {
@@ -24,9 +25,9 @@ export const metadata: Metadata = {
     locale: "en_IN",
     images: [
       {
-        url: "https://kghomecare.in/wp-content/uploads/og-image.jpg",
-        width: 1200,
-        height: 630,
+        url: LOGO_URL,
+        width: 1254,
+        height: 1254,
       },
     ],
   },

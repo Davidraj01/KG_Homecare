@@ -14,6 +14,7 @@ import { Section } from "@/components/site/Section";
 import { ScrollReveal } from "@/components/site/ScrollReveal";
 import { ServiceHeroForm } from "@/components/site/ServiceHeroForm";
 import { ContactCTA } from "@/components/site/ContactCTA";
+import { LOGO_URL } from "@/lib/contact";
 
 export const metadata: Metadata = {
   title:
@@ -27,6 +28,7 @@ export const metadata: Metadata = {
     description:
       "Doorstep washing machine service, installation & maintenance. Same day service, genuine parts, 1-year warranty.",
     url: "/thoothukudi",
+    images: [LOGO_URL],
   },
   alternates: { canonical: "/thoothukudi" },
 };

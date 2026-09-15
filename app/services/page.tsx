@@ -5,6 +5,7 @@ import { ServicesGrid } from "@/components/site/ServicesGrid";
 import { ContactCTA } from "@/components/site/ContactCTA";
 import { ServicesInteractive } from "@/components/site/ServicesInteractive";
 import { getPublicServices } from "@/lib/cms";
+import { LOGO_URL } from "@/lib/contact";
 
 export const revalidate = 60;
 
@@ -18,6 +19,7 @@ export const metadata: Metadata = {
     title: "Washing Machine Services — KG Home Care",
     description: "Repair, installation, drum cleaning, PCB and motor service — all major brands.",
     url: "/services",
+    images: [LOGO_URL],
   },
 };
 

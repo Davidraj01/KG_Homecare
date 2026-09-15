@@ -3,6 +3,7 @@ import Link from "next/link";
 import { PageHeader } from "@/components/site/PageHeader";
 import { Section } from "@/components/site/Section";
 import { CalendarCheck, Clock, ShieldCheck, Wrench } from "lucide-react";
+import { LOGO_URL } from "@/lib/contact";
 
 export const metadata: Metadata = {
   title: "Service Coverage — KG Home Care",
@@ -14,6 +15,7 @@ export const metadata: Metadata = {
     title: "Service Coverage — KG Home Care",
     description: "Submit your details and we'll confirm service availability in your area.",
     url: "/coverage",
+    images: [LOGO_URL],
   },
   alternates: { canonical: "/coverage" },
 };

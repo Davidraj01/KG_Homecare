@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { BUSINESS } from "@/lib/contact";
+import { BUSINESS, LOGO_URL } from "@/lib/contact";
 import { getPublicServices } from "@/lib/cms";
 import { Section } from "@/components/site/Section";
 import { ScrollReveal } from "@/components/site/ScrollReveal";
@@ -25,6 +25,7 @@ export const metadata: Metadata = {
     title: `${BUSINESS.name} — ${BUSINESS.tagline}`,
     description: "Professional washing machine service. Same-day service, genuine parts, 1-year warranty.",
     url: "/",
+    images: [LOGO_URL],
   },
 };
 

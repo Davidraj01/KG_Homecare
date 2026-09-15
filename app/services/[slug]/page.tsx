@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Section } from "@/components/site/Section";
 import { ContactCTA } from "@/components/site/ContactCTA";
-import { SERVICES, BRANDS } from "@/lib/contact";
+import { SERVICES, BRANDS, LOGO_URL } from "@/lib/contact";
 import { getPublicServiceBySlug } from "@/lib/cms";
 import { Check, ArrowRight, ShieldCheck, Wrench, Clock } from "lucide-react";
 
@@ -107,6 +107,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         "short" in service ? service.short : service.description || "",
       url: `/services/${slug}`,
       type: "article",
+      images: [LOGO_URL],
     },
   };
 }

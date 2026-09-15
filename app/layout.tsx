@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import { AppShell } from "@/components/site/AppShell";
-import { BUSINESS } from "@/lib/contact";
+import { BUSINESS, LOGO_URL } from "@/lib/contact";
 import "./globals.css";
 
 const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
@@ -22,6 +22,22 @@ export const metadata: Metadata = {
   ...(GOOGLE_SITE_VERIFICATION
     ? { verification: { google: GOOGLE_SITE_VERIFICATION } }
     : {}),
+  openGraph: {
+    siteName: BUSINESS.name,
+    images: [{ url: LOGO_URL, width: 1254, height: 1254, alt: BUSINESS.name }],
+  },
+  twitter: {
+    card: "summary",
+    images: [LOGO_URL],
+  },
+};
+
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: BUSINESS.name,
+  url: "https://kghomecare.in",
+  logo: LOGO_URL,
 };
 
 export default function RootLayout({
@@ -31,6 +47,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <Script id="organization-schema" type="application/ld+json">
+        {JSON.stringify(organizationSchema)}
+      </Script>
       {GTM_ID ? (
         <Script id="gtm-script" strategy="afterInteractive">
           {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${GTM_ID}');`}
