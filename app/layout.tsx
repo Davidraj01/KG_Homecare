@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     : {}),
   openGraph: {
     siteName: BUSINESS.name,
-    images: [{ url: LOGO_URL, width: 1254, height: 1254, alt: BUSINESS.name }],
+    images: [{ url: LOGO_URL, width: 1077, height: 1077, alt: BUSINESS.name }],
   },
   twitter: {
     card: "summary",

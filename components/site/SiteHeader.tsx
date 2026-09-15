@@ -59,10 +59,10 @@ export function SiteHeader() {
             <Image
               src="/logos/kg_homecare_logo.png"
               alt="KG Home Care"
-              width={1254}
-              height={1254}
+              width={1077}
+              height={1077}
               priority
-              className="h-11 w-11 rounded-md object-contain sm:h-12 sm:w-12"
+              className="h-12 w-12 rounded-md object-contain sm:h-14 sm:w-14"
             />
             {isHome ? (
               <span className="hidden text-[10px] font-medium uppercase tracking-wide text-muted-foreground sm:inline">
@@ -137,9 +137,9 @@ export function SiteHeader() {
             <Image
               src="/logos/kg_homecare_logo.png"
               alt="KG Home Care"
-              width={1254}
-              height={1254}
-              className="h-10 w-10 rounded-md object-contain"
+              width={1077}
+              height={1077}
+              className="h-12 w-12 rounded-md object-contain"
             />
             <div>
               <p className="text-base font-extrabold tracking-tight text-foreground">KG Home Care</p>

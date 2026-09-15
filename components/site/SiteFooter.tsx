@@ -14,9 +14,9 @@ export function SiteFooter() {
           <Image
             src="/logos/kg_homecare_logo.png"
             alt="KG Home Care"
-            width={1254}
-            height={1254}
-            className="h-14 w-14 rounded-md object-contain"
+            width={1077}
+            height={1077}
+            className="h-16 w-16 rounded-md object-contain"
           />
           <span className="mt-3 block text-base font-extrabold tracking-tight text-white">{BUSINESS.name}</span>
           <p className="mt-1 text-xs font-medium text-white/40">{BUSINESS.tagline}</p>

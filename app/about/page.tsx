@@ -26,8 +26,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: LOGO_URL,
-        width: 1254,
-        height: 1254,
+        width: 1077,
+        height: 1077,
       },
     ],
   },
@@ -130,8 +130,8 @@ const organizationSchema = {
   "@type": "Organization",
   name: "KG Home Care",
   url: "https://kghomecare.in/",
-  logo: "https://kghomecare.in/wp-content/uploads/logo.png",
-  image: "https://kghomecare.in/wp-content/uploads/logo.png",
+  logo: LOGO_URL,
+  image: LOGO_URL,
   description:
     "Get to know KG Home Care, your trusted washing machine specialists, delivering reliable solutions with experienced technicians and quality service.",
 };
