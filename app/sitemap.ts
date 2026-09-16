@@ -5,7 +5,7 @@ import { getPublishedSeoPages, getPublicServices } from "@/lib/cms";
 // rather than being statically cached at build time
 export const dynamic = "force-dynamic";
 
-const BASE_URL = "https://kghomecare.in";
+const BASE_URL = "https://www.kghomecare.in";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Static pages

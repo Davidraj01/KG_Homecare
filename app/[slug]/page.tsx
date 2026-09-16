@@ -43,12 +43,12 @@ export async function generateMetadata({ params }: SeoPageProps): Promise<Metada
     title: { absolute: parsed.title || page.heading || page.title },
     ...(parsed.description ? { description: parsed.description } : {}),
     ...(parsed.keywords ? { keywords: parsed.keywords } : {}),
-    alternates: { canonical: `https://kghomecare.in/${page.slug}` },
+    alternates: { canonical: `https://www.kghomecare.in/${page.slug}` },
     ...(parsed.robots ? { robots: parsed.robots } : {}),
     openGraph: {
       title: parsed.ogTitle || parsed.title || page.heading || page.title,
       ...(parsed.ogDescription || parsed.description ? { description: parsed.ogDescription || parsed.description } : {}),
-      url: `https://kghomecare.in/${page.slug}`,
+      url: `https://www.kghomecare.in/${page.slug}`,
       images: [parsed.ogImage || LOGO_URL],
       ...(parsed.ogType ? { type: parsed.ogType as "website" | "article" } : {}),
     },
@@ -141,7 +141,7 @@ export default async function SeoPage({ params }: SeoPageProps) {
     name: BUSINESS.name,
     description: page.subheading || BUSINESS.tagline,
     ...(page.location ? { areaServed: [page.location] } : {}),
-    url: `https://kghomecare.in/${page.slug}`,
+    url: `https://www.kghomecare.in/${page.slug}`,
     image: LOGO_URL,
     logo: LOGO_URL,
   };

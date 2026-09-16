@@ -19,8 +19,8 @@ const breadcrumbSchema = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Home", item: "https://kghomecare.in/" },
-    { "@type": "ListItem", position: 2, name: "Contact", item: "https://kghomecare.in/contact/" },
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://www.kghomecare.in/" },
+    { "@type": "ListItem", position: 2, name: "Contact", item: "https://www.kghomecare.in/contact/" },
   ],
 };
 

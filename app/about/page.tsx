@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     title: "KG Home Care | Washing Machine Experts",
     description:
       "Get to know KG Home Care, your trusted washing machine specialists, delivering reliable solutions with experienced technicians and quality service.",
-    url: "https://kghomecare.in/about/",
+    url: "https://www.kghomecare.in/about/",
     siteName: "KG Home Care",
     locale: "en_IN",
     images: [
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
       },
     ],
   },
-  alternates: { canonical: "https://kghomecare.in/about" },
+  alternates: { canonical: "https://www.kghomecare.in/about" },
 };
 
 const breadcrumbSchema = {
@@ -42,13 +42,13 @@ const breadcrumbSchema = {
       "@type": "ListItem",
       position: 1,
       name: "Home",
-      item: "https://kghomecare.in/",
+      item: "https://www.kghomecare.in/",
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "About",
-      item: "https://kghomecare.in/about/",
+      item: "https://www.kghomecare.in/about/",
     },
   ],
 };
@@ -57,7 +57,7 @@ const reviewSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: "KG Home Care",
-  url: "https://kghomecare.in/",
+  url: "https://www.kghomecare.in/",
   aggregateRating: {
     "@type": "AggregateRating",
     ratingValue: "5.0",
@@ -129,7 +129,7 @@ const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: "KG Home Care",
-  url: "https://kghomecare.in/",
+  url: "https://www.kghomecare.in/",
   logo: LOGO_URL,
   image: LOGO_URL,
   description:

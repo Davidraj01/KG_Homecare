@@ -1,6 +1,6 @@
 // Single source of truth for KG Home Care business info.
 
-export const LOGO_URL = "https://kghomecare.in/logos/kg_homecare_logo.png";
+export const LOGO_URL = "https://www.kghomecare.in/logos/kg_homecare_logo.png";
 
 export const BUSINESS = {
   name: "KG Home Care",

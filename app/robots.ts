@@ -9,6 +9,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/dashboard/", "/login/"],
       },
     ],
-    sitemap: "https://kghomecare.in/sitemap.xml",
+    sitemap: "https://www.kghomecare.in/sitemap.xml",
   };
 }

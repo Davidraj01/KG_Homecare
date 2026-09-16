@@ -12,7 +12,7 @@ const GOOGLE_SITE_VERIFICATION =
   "_3Xc52UeNf49StI2V1MN0J_G2cd-Tnftt30MzMNW53w";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://kghomecare.in"),
+  metadataBase: new URL("https://www.kghomecare.in"),
   title: {
     default: `${BUSINESS.name} — ${BUSINESS.tagline}`,
     template: `%s — ${BUSINESS.name}`,
@@ -36,7 +36,7 @@ const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: BUSINESS.name,
-  url: "https://kghomecare.in",
+  url: "https://www.kghomecare.in",
   logo: LOGO_URL,
 };
 
