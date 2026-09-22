@@ -1,10 +1,20 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Script from "next/script";
 import { MapPin } from "lucide-react";
 import { getPublishedSeoPages } from "@/lib/cms";
 import { Section } from "@/components/site/Section";
 import { ScrollReveal } from "@/components/site/ScrollReveal";
 import { LOGO_URL } from "@/lib/contact";
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://www.kghomecare.in/" },
+    { "@type": "ListItem", position: 2, name: "Locations", item: "https://www.kghomecare.in/locations" },
+  ],
+};
 
 export const metadata: Metadata = {
   title: "Locations — KG Home Care",
@@ -40,6 +50,9 @@ export default async function LocationsPage() {
 
   return (
     <>
+      <Script id="locations-breadcrumb" type="application/ld+json">
+        {JSON.stringify(breadcrumbSchema)}
+      </Script>
       {/* Hero */}
       <section className="relative overflow-hidden border-b border-border bg-radial-primary">
         <div

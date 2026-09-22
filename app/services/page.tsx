@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Section } from "@/components/site/Section";
 import { ScrollReveal } from "@/components/site/ScrollReveal";
 import { ServicesGrid } from "@/components/site/ServicesGrid";
@@ -6,6 +7,15 @@ import { ContactCTA } from "@/components/site/ContactCTA";
 import { ServicesInteractive } from "@/components/site/ServicesInteractive";
 import { getPublicServices } from "@/lib/cms";
 import { LOGO_URL } from "@/lib/contact";
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://www.kghomecare.in/" },
+    { "@type": "ListItem", position: 2, name: "Services", item: "https://www.kghomecare.in/services" },
+  ],
+};
 
 export const revalidate = 60;
 
@@ -28,6 +38,9 @@ export default async function ServicesPage() {
 
   return (
     <>
+      <Script id="services-breadcrumb" type="application/ld+json">
+        {JSON.stringify(breadcrumbSchema)}
+      </Script>
       <section className="relative overflow-hidden border-b border-border bg-radial-primary">
         <div
           aria-hidden

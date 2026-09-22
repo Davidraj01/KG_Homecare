@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import { AppShell } from "@/components/site/AppShell";
-import { BUSINESS, LOGO_URL } from "@/lib/contact";
+import { BUSINESS, LOGO_URL, PHONE_DISPLAY } from "@/lib/contact";
 import "./globals.css";
 
 const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
@@ -34,10 +34,32 @@ export const metadata: Metadata = {
 
 const organizationSchema = {
   "@context": "https://schema.org",
-  "@type": "Organization",
+  "@type": "LocalBusiness",
   name: BUSINESS.name,
   url: "https://www.kghomecare.in",
   logo: LOGO_URL,
+  image: LOGO_URL,
+  telephone: PHONE_DISPLAY,
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: `${BUSINESS.address.line1} ${BUSINESS.address.line2}`,
+    addressLocality: BUSINESS.address.city,
+    addressRegion: "Tamil Nadu",
+    addressCountry: "IN",
+  },
+  areaServed: BUSINESS.address.city,
+  aggregateRating: {
+    "@type": "AggregateRating",
+    ratingValue: "5.0",
+    reviewCount: "25",
+  },
+};
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: BUSINESS.name,
+  url: "https://www.kghomecare.in",
 };
 
 export default function RootLayout({
@@ -49,6 +71,9 @@ export default function RootLayout({
     <html lang="en">
       <Script id="organization-schema" type="application/ld+json">
         {JSON.stringify(organizationSchema)}
+      </Script>
+      <Script id="website-schema" type="application/ld+json">
+        {JSON.stringify(websiteSchema)}
       </Script>
       {GTM_ID ? (
         <Script id="gtm-script" strategy="afterInteractive">

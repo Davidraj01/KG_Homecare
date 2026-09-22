@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Script from "next/script";
 import { notFound } from "next/navigation";
-import { BUSINESS, LOGO_URL } from "@/lib/contact";
+import { BUSINESS, LOGO_URL, PHONE_DISPLAY } from "@/lib/contact";
 import { getPublishedSeoPageBySlug } from "@/lib/cms";
 import { Section } from "@/components/site/Section";
 import { ScrollReveal } from "@/components/site/ScrollReveal";
@@ -135,15 +135,32 @@ export default async function SeoPage({ params }: SeoPageProps) {
 
   const location = page.location || "your area";
 
+  const pageUrl = `https://www.kghomecare.in/${page.slug}`;
+
   const schema = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     name: BUSINESS.name,
     description: page.subheading || BUSINESS.tagline,
     ...(page.location ? { areaServed: [page.location] } : {}),
-    url: `https://www.kghomecare.in/${page.slug}`,
+    url: pageUrl,
     image: LOGO_URL,
     logo: LOGO_URL,
+    telephone: PHONE_DISPLAY,
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: "5.0",
+      reviewCount: "25",
+    },
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.kghomecare.in/" },
+      { "@type": "ListItem", position: 2, name: page.heading || page.title, item: pageUrl },
+    ],
   };
 
   const faqSchema =
@@ -166,6 +183,9 @@ export default async function SeoPage({ params }: SeoPageProps) {
     <>
       <Script id={`seo-page-schema-${page.id}`} type="application/ld+json">
         {JSON.stringify(schema)}
+      </Script>
+      <Script id={`seo-page-breadcrumb-${page.id}`} type="application/ld+json">
+        {JSON.stringify(breadcrumbSchema)}
       </Script>
       {faqSchema ? (
         <Script id={`seo-page-faq-${page.id}`} type="application/ld+json">

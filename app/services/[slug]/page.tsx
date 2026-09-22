@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
+import Script from "next/script";
 import { Section } from "@/components/site/Section";
 import { ContactCTA } from "@/components/site/ContactCTA";
-import { SERVICES, BRANDS, LOGO_URL } from "@/lib/contact";
+import { SERVICES, BRANDS, LOGO_URL, BUSINESS, PHONE_DISPLAY } from "@/lib/contact";
 import { getPublicServiceBySlug } from "@/lib/cms";
 import { Check, ArrowRight, ShieldCheck, Wrench, Clock } from "lucide-react";
 
@@ -134,8 +135,42 @@ export default async function ServiceDetailPage({ params }: Props) {
   const imageKey = "image" in service ? service.image : fallbackService?.image;
   const img = imageKey ? IMG_MAP[imageKey] : null;
 
+  const serviceUrl = `https://www.kghomecare.in/services/${service.slug}`;
+  const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    serviceType: service.name,
+    name: service.name,
+    description:
+      "description" in service && service.description ? service.description : d.intro,
+    url: serviceUrl,
+    areaServed: BUSINESS.address.city,
+    provider: {
+      "@type": "LocalBusiness",
+      name: BUSINESS.name,
+      telephone: PHONE_DISPLAY,
+      url: "https://www.kghomecare.in",
+    },
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.kghomecare.in/" },
+      { "@type": "ListItem", position: 2, name: "Services", item: "https://www.kghomecare.in/services" },
+      { "@type": "ListItem", position: 3, name: service.name, item: serviceUrl },
+    ],
+  };
+
   return (
     <>
+      <Script id={`service-schema-${service.slug}`} type="application/ld+json">
+        {JSON.stringify(serviceSchema)}
+      </Script>
+      <Script id={`service-breadcrumb-${service.slug}`} type="application/ld+json">
+        {JSON.stringify(breadcrumbSchema)}
+      </Script>
       {/* Hero section with decorative elements */}
       <section className="relative overflow-hidden border-b border-border bg-radial-primary">
         {/* Dot grid */}
