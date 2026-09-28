@@ -15,6 +15,13 @@ const nextConfig: NextConfig = {
         destination: "/samsung-washing-machine-service-centre-in-thoothukudi",
         permanent: true,
       },
+      // Indexed/shared URL with no matching published SEO page — send it to
+      // the closest live equivalent (the Thoothukudi service hub) instead of 404.
+      {
+        source: "/washing-machine-service-centre-in-thoothukudi",
+        destination: "/thoothukudi",
+        permanent: true,
+      },
     ];
   },
 };
