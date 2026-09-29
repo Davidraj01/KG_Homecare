@@ -12,14 +12,14 @@ export const metadata: Metadata = {
     absolute: "KG Home Care | Washing Machine Experts",
   },
   description:
-    "Get to know KG Home Care, your trusted washing machine specialists, delivering reliable solutions with experienced technicians and quality service.",
+    "Get to know KG Home Care, your trusted washing machine experts, delivering reliable solutions with experienced technicians and quality service.",
   keywords:
-    "kg home care, washing machine experts, professional washing machine technicians, trusted appliance service company, experienced washing machine specialists, washing machine service provider, home appliance care experts, local washing machine specialists, reliable appliance technicians, kg home care about us",
+    "kg home care, washing machine experts, professional washing machine technicians, trusted appliance service company, experienced washing machine technicians, washing machine service provider, home appliance care experts, reliable appliance technicians, kg home care about us",
   openGraph: {
     type: "website",
     title: "KG Home Care | Washing Machine Experts",
     description:
-      "Get to know KG Home Care, your trusted washing machine specialists, delivering reliable solutions with experienced technicians and quality service.",
+      "Get to know KG Home Care, your trusted washing machine experts, delivering reliable solutions with experienced technicians and quality service.",
     url: "https://www.kghomecare.in/about/",
     siteName: "KG Home Care",
     locale: "en_IN",
@@ -133,7 +133,7 @@ const organizationSchema = {
   logo: LOGO_URL,
   image: LOGO_URL,
   description:
-    "Get to know KG Home Care, your trusted washing machine specialists, delivering reliable solutions with experienced technicians and quality service.",
+    "Get to know KG Home Care, your trusted washing machine experts, delivering reliable solutions with experienced technicians and quality service.",
 };
 
 const STATS = [

@@ -123,7 +123,7 @@ export default async function ServiceDetailPage({ params }: Props) {
   const d =
     DETAIL[service.slug] ??
     ({
-      intro: "Service from trained washing machine specialists.",
+      intro: "Service from trained washing machine technicians.",
       includes: [
         "Fast technician dispatch",
         "Transparent diagnosis",
