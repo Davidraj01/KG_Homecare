@@ -13,8 +13,6 @@ export const BUSINESS = {
   hours: "Mon – Sun · 8:00 AM – 9:00 PM",
 };
 
-// WhatsApp-only contact number — used on the contact page. Clicking it opens
-// WhatsApp, not the phone dialer.
 export const WHATSAPP_RAW = "918122931402";
 export const PHONE_DISPLAY = "+91 81229 31402";
 
@@ -23,6 +21,9 @@ export function waHref(message?: string): string {
   if (!message) return base;
   return `${base}?text=${encodeURIComponent(message)}`;
 }
+
+// Opens the phone dialer on mobile with the number pre-filled.
+export const PHONE_TEL_HREF = `tel:+${WHATSAPP_RAW}`;
 
 export const BRANDS = [] as const;
 

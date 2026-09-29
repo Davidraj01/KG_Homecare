@@ -9,12 +9,13 @@ import {
   Clock,
   Award,
   ArrowRight,
+  Phone,
 } from "lucide-react";
 import { Section } from "@/components/site/Section";
 import { ScrollReveal } from "@/components/site/ScrollReveal";
 import { ServiceHeroForm } from "@/components/site/ServiceHeroForm";
 import { ContactCTA } from "@/components/site/ContactCTA";
-import { LOGO_URL } from "@/lib/contact";
+import { LOGO_URL, PHONE_TEL_HREF } from "@/lib/contact";
 
 export const metadata: Metadata = {
   title:
@@ -151,6 +152,13 @@ export default function ThoothukudiPage() {
                 >
                   <CalendarCheck className="h-4 w-4" />
                   Book Now
+                </a>
+                <a
+                  href={PHONE_TEL_HREF}
+                  className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/10 px-6 py-3 text-sm font-bold text-white backdrop-blur-sm transition-all hover:-translate-y-0.5 hover:bg-white/20"
+                >
+                  <Phone className="h-4 w-4" />
+                  Call Now
                 </a>
               </div>
             </div>

@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { CalendarCheck } from "lucide-react";
+import { CalendarCheck, Phone } from "lucide-react";
 import { usePathname } from "next/navigation";
+import { PHONE_TEL_HREF } from "@/lib/contact";
 
 export function FloatingActions() {
   const pathname = usePathname();
@@ -27,6 +28,14 @@ export function FloatingActions() {
         <CalendarCheck className="h-5 w-5" />
         <span className="hidden sm:inline">Book Now</span>
       </Link>
+      <a
+        href={PHONE_TEL_HREF}
+        aria-label="Call now"
+        className="flex items-center gap-2.5 rounded-full bg-white px-5 py-3.5 text-sm font-bold text-primary shadow-[0_4px_20px_-4px_rgba(24,95,165,0.35)] ring-1 ring-primary/15 transition-all hover:scale-105 hover:bg-primary/5 active:scale-95"
+      >
+        <Phone className="h-5 w-5" />
+        <span className="hidden sm:inline">Call Now</span>
+      </a>
     </div>
   );
 }

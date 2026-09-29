@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Script from "next/script";
 import { notFound } from "next/navigation";
-import { BUSINESS, LOGO_URL, PHONE_DISPLAY } from "@/lib/contact";
+import { BUSINESS, LOGO_URL, PHONE_DISPLAY, PHONE_TEL_HREF } from "@/lib/contact";
 import { getPublishedSeoPageBySlug } from "@/lib/cms";
 import { Section } from "@/components/site/Section";
 import { ScrollReveal } from "@/components/site/ScrollReveal";
@@ -14,6 +14,7 @@ import {
   Wrench,
   Award,
   CalendarCheck,
+  Phone,
 } from "lucide-react";
 
 type SeoPageProps = {
@@ -264,14 +265,21 @@ export default async function SeoPage({ params }: SeoPageProps) {
                 ))}
               </ul>
 
-              {/* Hero CTA button */}
+              {/* Hero CTA buttons */}
               <div className="mt-8 flex flex-wrap gap-3">
                 <a
                   href="#book"
                   className="inline-flex items-center gap-2 rounded-xl bg-white px-6 py-3 text-sm font-bold text-primary shadow-lg transition-all hover:-translate-y-0.5"
                 >
                   <CalendarCheck className="h-4 w-4" />
-                  {page.cta_text || "Book Now"}
+                  Book Now
+                </a>
+                <a
+                  href={PHONE_TEL_HREF}
+                  className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/10 px-6 py-3 text-sm font-bold text-white backdrop-blur-sm transition-all hover:-translate-y-0.5 hover:bg-white/20"
+                >
+                  <Phone className="h-4 w-4" />
+                  Call Now
                 </a>
               </div>
             </div>
