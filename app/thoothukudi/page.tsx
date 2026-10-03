@@ -34,48 +34,49 @@ export const metadata: Metadata = {
   alternates: { canonical: "/thoothukudi" },
 };
 
-// Internal links to SEO pages — update slugs as you create them in the dashboard
+// Internal links to live SEO pages — every slug here must exist in the dashboard
+// (a missing slug is a 404 that wastes crawl budget); use /services as a fallback
 const SERVICE_LINKS = [
   {
     title: "Washing Machine Service",
     description:
       "Complete doorstep service for all washing machine issues — drum, motor, PCB & drainage problems diagnosed and fixed.",
-    slug: "/washing-machine-service-thoothukudi",
+    slug: "/washing-machine-service-at-home",
     icon: Wrench,
   },
   {
     title: "Installation & Uninstallation",
     description:
       "Safe, certified installation with proper leveling, hose connection & test cycle. Uninstallation for shifting or replacement.",
-    slug: "/washing-machine-installation-thoothukudi",
+    slug: "/washing-machine-installation-thoothukudi-kg-home-care",
     icon: CheckCircle,
   },
   {
     title: "Drum Cleaning & Deep Cleaning",
     description:
       "Professional drum cleaning to remove detergent residue, mold, bacteria & bad odor. Extends machine life by 3-5 years.",
-    slug: "/drum-cleaning-thoothukudi",
+    slug: "/washing-machine-drum-cleaning-thoothukudi-kg-home-care",
     icon: Award,
   },
   {
     title: "PCB & Control Board Service",
     description:
       "Component-level PCB diagnosis & soldering. Error code troubleshooting. Save ₹2000-4000 vs full board replacement.",
-    slug: "/pcb-service-thoothukudi",
+    slug: "/services",
     icon: ShieldCheck,
   },
   {
     title: "Motor Service",
     description:
       "Motor rewinding, bearing replacement, coupling fix & direct drive motor service. All front-load & top-load models.",
-    slug: "/motor-service-thoothukudi",
+    slug: "/services",
     icon: Wrench,
   },
   {
     title: "Water Leakage Service",
     description:
       "Gasket, inlet valve, tub seal & hose leak diagnosis and fix. Same day resolution for all leakage issues.",
-    slug: "/water-leakage-service-thoothukudi",
+    slug: "/services",
     icon: Clock,
   },
 ];

@@ -60,6 +60,8 @@ export function SiteFooter() {
             <li><Link href="/" className="text-white/55 hover:text-white">Home</Link></li>
             <li><Link href="/services" className="text-white/55 hover:text-white">Services</Link></li>
             <li><Link href="/about" className="text-white/55 hover:text-white">About Us</Link></li>
+            <li><Link href="/thoothukudi" className="text-white/55 hover:text-white">Thoothukudi Service</Link></li>
+            <li><Link href="/locations" className="text-white/55 hover:text-white">Service Locations</Link></li>
             <li><Link href="/contact" className="text-white/55 hover:text-white">Contact</Link></li>
           </ul>
         </div>
