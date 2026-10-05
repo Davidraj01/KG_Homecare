@@ -280,7 +280,7 @@ export default function ThoothukudiPage() {
                 {
                   icon: Award,
                   title: "Genuine Spare Parts",
-                  text: "Only OEM parts from authorized suppliers. No duplicates.",
+                  text: "Only OEM parts from trusted suppliers. No duplicates.",
                 },
                 {
                   icon: ShieldCheck,

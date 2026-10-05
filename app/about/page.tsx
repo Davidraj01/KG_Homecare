@@ -151,7 +151,7 @@ const VALUES = [
   {
     icon: Wrench,
     title: "Genuine Spare Parts",
-    description: "We use only OEM-grade spare parts from authorised distributors for lasting service.",
+    description: "We use only OEM-grade spare parts from trusted distributors for lasting service.",
   },
   {
     icon: Clock,
