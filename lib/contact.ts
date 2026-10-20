@@ -13,8 +13,8 @@ export const BUSINESS = {
   hours: "Mon – Sun · 8:00 AM – 9:00 PM",
 };
 
-export const WHATSAPP_RAW = "918122931402";
-export const PHONE_DISPLAY = "+91 81229 31402";
+export const WHATSAPP_RAW = "918778838405";
+export const PHONE_DISPLAY = "+91 87788 38405";
 
 export function waHref(message?: string): string {
   const base = `https://wa.me/${WHATSAPP_RAW}`;
